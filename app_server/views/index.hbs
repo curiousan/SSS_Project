@@ -1,1 +1,15 @@
-<h1>{{name}}</h1    >
+ {{#if message }}
+      <div class="alert alert-success">{{message}}</div>
+  {{/if}}
+
+  {{#if user.facebook.name}}
+      <div class="alert alert-success"> Welcome {{user.facebook.name}}</div>
+
+  {{/if}}
+
+  {{#if user.local.username}}
+      <div class="alert alert-success"> Welcome {{user.local.username}}</div>
+
+  {{/if}}
+
+  <a href="/logout"><button class="btn btn-danger" type="button">Logout</button></a>
