@@ -31,11 +31,12 @@ const options = {
     cert: sslcert,
 };
 // connect to database and start listening on port 3000
+// TODO: .env for URL of db server?
 DB.connect('mongodb://localhost:27017/final_project', app, options, https);
 
 
 // set up express app
-
+// TODO: candidate for .env
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());

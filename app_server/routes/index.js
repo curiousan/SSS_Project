@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 // const User = require('./../models/user');
 const passport = require('./../config/passport');
 // const utilities = require('./../models/utilities');
@@ -26,6 +27,14 @@ router.use(passport.session());
 
 router.get('/', isLoggedIn, (req, res) => {
 res.render('index', {user: req.user});
+});
+router.get('/add', isLoggedIn, (req, res) => {
+    res.render('add', {user: req.user});
+    });
+
+router.get('/printBuckets', isLoggedIn, (req, res) => {
+    aws.listBucket();
+    res.render('index', {user: req.user});
 });
 
 router.get('/logout', (req, res) => {

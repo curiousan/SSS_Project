@@ -2,7 +2,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook');
-const configAuth = require('./auth');
 
 
 // load the user model
@@ -122,6 +121,8 @@ passport.use('local-login', new LocalStrategy({
             return done(err);
         }
         if (!user) {
+            // TODO: generic error message!
+            // MAYBE: add a small delay before returning (simulate the pwd hash verify, so attacker don't know).
             return done(null, false, req.flash('loginMessage', 'No user found'));
         }
         if (!user.validatePassword(password)) {

@@ -13,6 +13,7 @@ const User = new mongoose.Schema({
       name: String,
       email: String, 
     },
+    
 });
 
 User.methods.generateHash = (password) => {
