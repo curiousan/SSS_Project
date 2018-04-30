@@ -24,11 +24,13 @@ const MongodbStore = require('connect-mongo')(session);
 
 
 // ssl setup
-const sslkey = fs.readFileSync('ssl-key.pem');
-const sslcert = fs.readFileSync('ssl-cert.pem');
+const sslkey = fs.readFileSync('./key.pem');
+const sslcert = fs.readFileSync('./cert.pem');
 const options = {
     key: sslkey,
     cert: sslcert,
+    requestCert: false,
+    rejectUnauthorized: false,
 };
 // connect to database and start listening on port 3000
 // TODO: .env for URL of db server?

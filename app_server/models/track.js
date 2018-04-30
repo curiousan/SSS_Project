@@ -13,6 +13,7 @@ const Track = new Schema({
     thumbnail: String,
     language: String,
     artists: [{type: Schema.Types.ObjectId, ref: 'Artist'}],
+    desc: String,
 });
 
 module.export.trackSchema = Track;
