@@ -65,7 +65,7 @@ app.set('view engine', 'hbs');
 
 // all middleware for express
 app.set('views', path.join(__dirname, 'app_server', 'views'));
-app.set(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static('public'));
 
 // end points handlers
 

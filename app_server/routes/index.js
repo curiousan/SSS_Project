@@ -26,15 +26,15 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/', isLoggedIn, (req, res) => {
-res.render('index', {user: req.user});
+    res.render('index', { user: req.user });
 });
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('add', {user: req.user});
-    });
+    res.render('add', { user: req.user });
+});
 
 router.get('/printBuckets', isLoggedIn, (req, res) => {
     aws.listBucket();
-    res.render('index', {user: req.user});
+    res.render('index', { user: req.user });
 });
 
 router.get('/logout', (req, res) => {
@@ -47,12 +47,12 @@ router.get('/logout', (req, res) => {
 //  --------- local routes -------------------------------------//
 
 router.get('/login', isLoggedOut, (req, res) => {
-    res.render('login' , {message: req.flash('loginMessage')} );
+    res.render('login', { message: req.flash('loginMessage') });
 });
 
 
 router.get('/signup', isLoggedOut, (req, res) => {
-    res.render('signup', {message: req.flash('signUpMessage')} );
+    res.render('signup', { message: req.flash('signUpMessage') });
 });
 
 router.post('/login', isLoggedOut, (req, res, next) => {
