@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const aws = require('./../config/aws');
+const Video = require('./../models/video');
 const upload = aws.upload;
 
 
@@ -14,8 +15,12 @@ router.get('/videos', (req, res) => {
 });
 
 // add a new videos
-router.post('/videos', upload.single('track'), (req, res) => {
-    res.send('sucessfully uploaded the file with the name ' + req.file.fieldname);
+router.post('/videos', upload.single('video'), (req, res) => {
+    console.log('new file upload request');
+    aws.uploadfile(req, (err, msg) =>{
+        if (err) return res.send(err);
+       return res.redirect('/');
+    });
 });
 
 // get a specific video

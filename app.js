@@ -41,7 +41,8 @@ DB.connect('mongodb://localhost:27017/final_project', app, options, https);
 // TODO: candidate for .env
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // passport js setup
 app.use(session({
