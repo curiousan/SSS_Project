@@ -24,24 +24,28 @@ const MongodbStore = require('connect-mongo')(session);
 
 
 // ssl setup
-const sslkey = fs.readFileSync('./key.pem');
-const sslcert = fs.readFileSync('./cert.pem');
+const sslkey = fs.readFileSync('./ssl-key.pem');
+const sslcert = fs.readFileSync('./ssl-cert.pem');
 const options = {
     key: sslkey,
     cert: sslcert,
     requestCert: false,
     rejectUnauthorized: false,
 };
+const mongoUser = process.env.MLAB_USER;
+const mongoPass = process.env.MLAB_PASS;
+const mongoStore = process.env.MLAB_STORE;
+
 // connect to database and start listening on port 3000
 // TODO: .env for URL of db server?
-DB.connect('mongodb://localhost:27017/final_project', app, options, https);
+DB.connect(`mongodb://${mongoUser}:${mongoPass}@ds163119.mlab.com:63119/${mongoStore}`, app, options, https);
 
 
 // set up express app
 // TODO: candidate for .env
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: false }));
 
 // passport js setup
 app.use(session({
