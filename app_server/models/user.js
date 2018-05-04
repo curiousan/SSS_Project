@@ -6,6 +6,7 @@ const User = new mongoose.Schema({
         email: String,
         password: String,
         username: String,
+        name: String,
     },
     facebook: {
       id: String,

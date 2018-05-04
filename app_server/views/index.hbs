@@ -1,18 +1,40 @@
- {{#if message }}
-      <div class="alert alert-success">{{message}}</div>
-  {{/if}}
+<div class="container">
+    {{#if message }}
+    <div class="alert alert-success">{{message}}</div>
+    {{/if}} {{#if user.facebook.name}}
+    <div class="alert alert-success"> Welcome {{user.facebook.name}}</div>
 
-  {{#if user.facebook.name}}
-      <div class="alert alert-success"> Welcome {{user.facebook.name}}</div>
+    {{/if}} {{#if user.local.username}}
+    <div class="alert alert-success"> Welcome {{user.local.username}}</div>
 
-  {{/if}}
+    {{/if}}
 
-  {{#if user.local.username}}
-      <div class="alert alert-success"> Welcome {{user.local.username}}</div>
+    <input type="text" name="" id="searchText" class="form-control" placeholder="Search any videos here">
+    <a href="/logout">
+    <button class="btn btn-danger" type="button">Logout</button>
+</a>
+    <div class="row items">
+        {{#each videos}} 
+        <div class="col-md-6 col-lg-4 item">
+            <div class="image">
+                <img src="{{this.thumbSrc}}" alt="image">
+            </div>
+            <h2>{{this.title}}</h2>
+            <p>{{this.desc}}</p>
+            {{#if this.user}}
+            <p> uploaded by: {{this.user}}</p> {{/if}}
 
-  {{/if}}
-
-  <a href="/logout"><button class="btn btn-danger" type="button">Logout</button></a>
-  <div id="my_player">
-    
+            <!-- Button trigger modal -->
+            <div class="buttons">
+                <a href="/video/{{this._id}}"><button type="button" class="btn btn-primary">View
+                </button> </a>
+                <a href="/update/{{this._id}}">
+                    <button type="button" class="btn btn-info update-item">Update</button>
+                </a>
+                <input type="button" class="btn btn-danger delete-item" value="delete" onclick="deleteItem('{{this._id}}')"></input>
+            </div>
+        </div>
+        {{/each}}
     </div>
+</div>
+

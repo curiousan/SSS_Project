@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
-
 // const User = require('./../models/user');
 const passport = require('./../config/passport');
+const videoController = require('./../controller/videoController');
 // const utilities = require('./../models/utilities');
 
 // a simple function to check if the user is logged in
@@ -26,8 +25,20 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/', isLoggedIn, (req, res) => {
-    res.render('index', { user: req.user });
+    videoController.allVideos(req, (err, data) => {
+        if (err) return res.render('index', err);
+        return res.render('index', { videos: data, user: req.user });
+    });
 });
+
+router.get('/video/:id', (req, res) => {
+    videoController.singleVideo(req, (err, data) => {
+        if (err) return res.redirect('/');
+        return res.render('player');
+    });
+});
+
+
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('add', { user: req.user });
 });
@@ -91,7 +102,6 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/',
     failureRedirect: '/login',
 }));
-
 
 
 module.exports = router;

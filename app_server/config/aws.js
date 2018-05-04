@@ -83,13 +83,18 @@ module.exports.upload = multer({ storage: storage });
 // uploading file to aws,
 
 module.exports.uploadfile = (req, cb) => {
+    const fileKey = req.file.filename.replace(/\.[^/.]+$/, '');
+    const username = req.user.local.name? req.user.local.name: req.user.facebook.name;
     const newVideo = new Video({
-        title: req.body.title,
-        category: req.body.category,
+        title: req.body['video-title'],
+        category: req.body['video-category'],
         artists: req.body['video-artists'],
         desc: req.body.desc,
-        uploader: req.user.id,
-        src: req.file.filename,
+        user: username,
+        progressiveSrc: fileKey,
+        dashSrc: process.env.CLOUDFRONT_URL+'/dash/'+fileKey+'-master.mpd',
+        hlsSrc: process.env.CLOUDFRONT_URL+'/hls/'+fileKey+'-master.m3u8',
+        thumbSrc: process.env.AWS_STORAGE_LINK+'s3-media-out/thumbs/'+fileKey+'-00002.png',
     });
     const length = getVideoLength(req.file.path);
     length ? newVideo.length = length : newVideo.length = 0;
@@ -98,7 +103,7 @@ module.exports.uploadfile = (req, cb) => {
         if (!err) {
             const params = {
                 Bucket: process.env.AWS_INPUT_BUCKET,
-                Key: req.file.filename,
+                Key: fileKey,
                 Body: data,
             };
             S3.putObject(params, (err, data) => {

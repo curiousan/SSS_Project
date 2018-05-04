@@ -5,7 +5,8 @@ require('dotenv').config();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const express = require('express');
 const app = express();
-const hbs = require('express-handlebars');
+const hb = require('express-handlebars');
+const hbs = require('./app_server/hbsHelper/dashboard')(hb);
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -62,10 +63,7 @@ app.use(session({
 app.use(flash());
 
 // handle bars setup
-app.engine('hbs', hbs({
-    extname: 'hbs', defaultLayout: 'layout',
-    layoutsDir: __dirname+'/app_server/views',
-}));
+app.engine('hbs', hbs.engine);
 
 // set custom templating engine to handlebars
 app.set('view engine', 'hbs');
