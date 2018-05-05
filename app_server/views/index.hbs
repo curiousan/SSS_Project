@@ -1,20 +1,45 @@
+<div class="top-bar container-fluid">
+    <nav class="navbar navbar-expand-sm bg-dark">
+        <a href="#" class="navbar-brand">Stream</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-controls="collapseMenu"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse nd-flex justify-content-end align-items-center" id="collapseMenu">
+            <ul class="navbar-nav wide-padded-list">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Videos </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Audios </a>
+
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{#if user.facebook.name}} {{user.facebook.name}} {{else}} {{user.local.name}} {{/if}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+
+</div>
+
 <div class="container">
-    {{#if message }}
-    <div class="alert alert-success">{{message}}</div>
-    {{/if}} {{#if user.facebook.name}}
-    <div class="alert alert-success"> Welcome {{user.facebook.name}}</div>
-
-    {{/if}} {{#if user.local.username}}
-    <div class="alert alert-success"> Welcome {{user.local.username}}</div>
-
-    {{/if}}
-
-    <input type="text" name="" id="searchText" class="form-control" placeholder="Search any videos here">
-    <a href="/logout">
-    <button class="btn btn-danger" type="button">Logout</button>
-</a>
     <div class="row items">
-        {{#each videos}} 
+        {{#each videos}}
         <div class="col-md-6 col-lg-4 item">
             <div class="image">
                 <img src="{{this.thumbSrc}}" alt="image">
@@ -26,8 +51,10 @@
 
             <!-- Button trigger modal -->
             <div class="buttons">
-                <a href="/video/{{this._id}}"><button type="button" class="btn btn-primary">View
-                </button> </a>
+                <a href="/video/{{this._id}}">
+                    <button type="button" class="btn btn-primary">View
+                    </button>
+                </a>
                 <a href="/update/{{this._id}}">
                     <button type="button" class="btn btn-info update-item">Update</button>
                 </a>
@@ -37,4 +64,3 @@
         {{/each}}
     </div>
 </div>
-

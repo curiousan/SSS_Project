@@ -2,9 +2,7 @@
 // importing the required dependecies //
 const express = require('express');
 const router = express.Router();
-const aws = require('./../config/aws');
 const videoController = require('./../controller/videoController');
-const upload = aws.upload;
 
 
 // /----- api endpoints ----/
@@ -18,7 +16,7 @@ router.get('/videos', (req, res) =>{
 });
 
 // add a new videos
-router.post('/videos', upload.single('video'), videoController.addNewVideo);
+router.post('/videos', videoController.addNewVideo);
 
 // get a specific video
 router.get('/videos/:id', (req, res)=>{

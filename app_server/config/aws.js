@@ -3,7 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const S3 = new AWS.S3();
 const Video = require('./../models/video');
@@ -78,13 +77,12 @@ module.exports.deleteObject = (req, res) => {
 };
 
 // --uploading the new files via the api
-module.exports.upload = multer({ storage: storage });
+module.exports.upload = multer({storage: storage});
 
 // uploading file to aws,
-
 module.exports.uploadfile = (req, cb) => {
     const fileKey = req.file.filename.replace(/\.[^/.]+$/, '');
-    const username = req.user.local.name? req.user.local.name: req.user.facebook.name;
+    const username = req.user.local.name ? req.user.local.name : req.user.facebook.name;
     const newVideo = new Video({
         title: req.body['video-title'],
         category: req.body['video-category'],
@@ -92,38 +90,44 @@ module.exports.uploadfile = (req, cb) => {
         desc: req.body.desc,
         user: username,
         progressiveSrc: fileKey,
-        dashSrc: process.env.CLOUDFRONT_URL+'/dash/'+fileKey+'-master.mpd',
-        hlsSrc: process.env.CLOUDFRONT_URL+'/hls/'+fileKey+'-master.m3u8',
-        thumbSrc: process.env.AWS_STORAGE_LINK+'s3-media-out/thumbs/'+fileKey+'-00002.png',
+        dashSrc: process.env.CLOUDFRONT_URL + '/dash/' + fileKey + '-master.mpd',
+        hlsSrc: process.env.CLOUDFRONT_URL + '/hls/' + fileKey + '-master.m3u8',
+        thumbSrc: process.env.AWS_STORAGE_LINK + 's3-media-out/thumbs/' + fileKey + '-00002.png',
     });
     const length = getVideoLength(req.file.path);
     length ? newVideo.length = length : newVideo.length = 0;
 
-    fs.readFile(req.file.path, (err, data) => {
-        if (!err) {
-            const params = {
-                Bucket: process.env.AWS_INPUT_BUCKET,
-                Key: fileKey,
-                Body: data,
-            };
-            S3.putObject(params, (err, data) => {
-                if (!err) {
-                    console.log('file uploaded to s3');
-                    Video.create(newVideo, (err, data) => {
-                        if (err) {
-                            console.log('some error while adding to the database');
-                            return cb(err, null);
-                        }
-                        return cb(null, 'successfully added the video');
-                    });
-                    fs.unlink(req.file.path);
-                } else {
-                    return cb(err, null);
-                }
-            });
-        } else {
+    Video.create(newVideo, (err, data) => {
+        if (err) {
             return cb(err, null);
         }
+        new Promise((resolve, reject)=>{
+            fs.readFile(req.file.path, (err, data) => {
+                if (!err) {
+                    const params = {
+                        Bucket: process.env.AWS_INPUT_BUCKET,
+                        Key: fileKey,
+                        Body: data,
+                    };
+                    S3.putObject(params, (err, data) => {
+                        if (!err) {
+                            
+                           
+                            fs.unlink(req.file.path);
+                            resolve('file uploaded to s3');
+                        } else {
+                            reject(err);
+                        }
+                    });
+                } else {
+                    reject(err);
+                }
+            });
+        }).then((result)=>{
+            console.log(result);
+        });
+
+        return cb(null, 'Upload Success and video will appear shortly!!');
     });
 };
 

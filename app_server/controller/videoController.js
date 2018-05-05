@@ -4,9 +4,10 @@
 'use strict';
 const Video = require('./../models/video');
 const aws = require('./../config/aws');
+const upload = require('./../config/aws').upload;
 
 // common errors and validation handlers
-const errHandler = (err) =>{
+const errHandler = (err) => {
     console.error('There was an error performing the operation');
     console.log(err);
     console.log(err.code);
@@ -15,8 +16,8 @@ const errHandler = (err) =>{
 
 // get all available videos
 
-module.exports.allVideos =(req, cb)=>{
-    return Video.find({}, (err, videos)=>{
+module.exports.allVideos = (req, cb) => {
+    return Video.find({}, (err, videos) => {
         if (err) {
             errHandler(err);
             return cb(err, null);
@@ -27,9 +28,8 @@ module.exports.allVideos =(req, cb)=>{
 
 
 // get a specific video with id
-
 module.exports.singleVideo = (req, cb) => {
-    return Video.findById(req.params.id, (err, data)=>{
+    return Video.findById(req.params.id, (err, data) => {
         if (err) {
             errHandler(err);
             return cb(err, null);
@@ -40,24 +40,29 @@ module.exports.singleVideo = (req, cb) => {
 
 
 // add a new video
-module.exports.addNewVideo =(req, res)=>{
-    aws.uploadfile(req, (err, msg) =>{
+module.exports.addNewVideo = (req, res) => {
+    upload.single('video')(req, res, (err) => {
         if (err) return res.send(err);
-       return res.redirect('/');
+        aws.uploadfile(req, (err, msg) => {
+            if (err) return res.send(err);
+            return res.send(msg);
+        });
     });
 };
 
 // update the existing videos
-module.exports.updateVideo = (req, res)=>{
-    return Video.findOne({id: req.params.id}, (err, video)=>{
+module.exports.updateVideo = (req, res) => {
+    return Video.findOne({ id: req.params.id }, (err, video) => {
         if (err) return errHandler(err);
     });
 };
 
+
+
 // delete the existing videos
 
-module.exports.deleteVideo = (req, res)=>{
-    return Video.findOneAndRemove({id: req.params.id}, (err, video) =>{
+module.exports.deleteVideo = (req, res) => {
+    return Video.findOneAndRemove({ id: req.params.id }, (err, video) => {
         if (err) return errHandler(err);
         return res.json(video);
     });

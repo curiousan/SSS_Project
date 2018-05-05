@@ -33,7 +33,7 @@ router.get('/', isLoggedIn, (req, res) => {
 
 router.get('/video/:id', (req, res) => {
     videoController.singleVideo(req, (err, data) => {
-        if (err) return res.redirect('/');
+        if (err) return res.redirect('/', {vide0: data});
         return res.render('player');
     });
 });

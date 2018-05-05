@@ -1,0 +1,17 @@
+
+
+@media (min-width: 768px) {
+    .navbar-center {
+      position: absolute;
+      left: 50%;
+      
+    }
+
+    .wide-padded-list li{
+        padding: 10px;
+    }
+}
+
+.top-bar{
+    min-height: 100px
+}
