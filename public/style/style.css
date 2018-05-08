@@ -1,17 +1,158 @@
+*{box-sizing: border-box};
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
 
-@media (min-width: 768px) {
-    .navbar-center {
-      position: absolute;
-      left: 50%;
+:root {
+    --jumbotron-padding-y: 3rem;
+  }
+
+  .modal img{
+      max-width: 100%;
+      overflow: hidden;
+  }
+
+  
+
+  @media (min-width: 768px) {
+    .jumbotron {
+      padding-top: calc(var(--jumbotron-padding-y) * 2);
+      padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+    }
+    .content-section{
+      margin-top: 100vh;
       
-    }
+  }
+  
 
-    .wide-padded-list li{
-        padding: 10px;
+  .content-section div{
+    padding: 1%;
+
+  }
+
+  @media(max-width: 767px) {
+      .header-overlay {
+        display: none;
+      }
+
+      .content-section{
+        margin-top: 50vh;
     }
+  }
+
+  .card:hover {
+    transition: all .2s ease-in-out;
+    transform: scale(1.05);
+  }
+  
+  .jumbotron {
+    padding-top: var(--jumbotron-padding-y);
+    padding-bottom: var(--jumbotron-padding-y);
+    background: transparent;
+  }
+ 
+  .jumbotron p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .jumbotron-heading {
+    font-weight: 300;
+  }
+
+  .recent-video-section .fetaure-videos{
+    padding-top: 5%;
+  }
+  .card img {
+    
+    max-height: 170px;
+  }
+
+  .recent-video-section .main-info-section{
+    padding-left: 3%;
+    padding-top: 5%; 
+  }
+
+  .recent-video-section .main-info-section li img{
+    max-width: 35px;;
+  }
+  
+  .jumbotron .container {
+    max-width: 40rem;
+  }
+
+.fullscreen-video-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
 }
 
-.top-bar{
-    min-height: 100px
+.fullscreen-video-wrap video{
+    width: 100vw;
+    height: 100%;
+    
 }
+
+.header-overlay {
+    height: 100%;
+    width: 100vw;
+    position: absolute;
+    top: 10rem;
+    left: 0;    
+}
+
+
+.search-bar{
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em;
+  background-color:rgb(79, 166, 236)
+}
+
+.search-bar input{
+  min-height: 3rem;
+  border: 2px solid grey;
+  text-align: center;
+  
+}
+.own-video-section{
+  margin-top: 1rem; 
+}
+.own-video-section h3{
+  text-align: center;
+  margin: 2em;
+} 
+.light-blue-background{
+  background-color: rgba(220, 242, 248, 0.288);
+  padding: 2%;
+}
+
+
+.navbar{
+    z-index: 10;
+
+}
+
+.nav-item{
+    margin-left: 1em;
+    
+}
+
+ .scrolled {
+  background-color: rgb(54, 51, 51) !important;
+  transition: background-color 200ms linear;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  footer p {
+    margin-bottom: .25rem;
+  }
+  
+  .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

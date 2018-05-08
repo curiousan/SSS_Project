@@ -1,22 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./static/style/style.css">
+    <!-- <link rel="stylesheet" href="./static/style/modal.css">  -->
 
-    <title> Final Project</title>
+
+    <title>Final Project</title>
 </head>
+
 <body>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIbBgdD5jACM8RMZhJ6nVy6xDhbcQyQuE" async defer></script>
-<script type="text/javascript" src="//bitmovin-a.akamaihd.net/bitmovin-player/stable/7/bitmovinplayer.js"></script>
-   
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog .modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="model-video" id="my_player">
+                    </div>
+                    <div class="model-video-info">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>Sandesh Poudel feat AKON</p>
+                                <p> Uploaded on 6 days ago</p>
+                                <p>Category: Entertainment</p>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <p>100 Views</p>
+                                <p>5 Rating </p>
+                            </div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, molestiae optio. Asperiores odit, ab
+                            corrupti rerum alias incidunt harum porro perspiciatis voluptatibus aut tempore optio omnis perferendis
+                            animi praesentium architecto!</p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary  modal-close-button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- nav bar starts here-->
+    <div class="top-bar container-fluid sticky-top">
+        <nav class="navbar navbar-expand-sm ">
+            <a href="#" class="navbar-brand">Stream</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-controls="collapseMenu"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse nd-flex justify-content-end align-items-center" id="collapseMenu">
+                <ul class="navbar-nav wide-padded-list">
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Videos </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Audios </a>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Sandesh Poudel</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">View Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </nav>
+
+    </div>
+
+
+    <!-- nav bar ends here -->
+
     {{{ body }}}
+    <!--Footer-->
+    <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
+        <!--Social buttons-->
+        <div class="text-center">
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-fb mx-1">
+                        <i class="fa fa-facebook"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-tw mx-1">
+                        <i class="fa fa-twitter"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-gplus mx-1">
+                        <i class="fa fa-google-plus"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-li mx-1">
+                        <i class="fa fa-linkedin"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-dribbble mx-1">
+                        <i class="fa fa-dribbble"> </i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/.Social buttons-->
+
+        <!--Copyright-->
+        <div class="footer-copyright py-3 text-center">
+            © 2018 Copyright:
+            <a href="https://faecbook.com/sandesh.poudel.12"> Sandesh Poudel </a>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIbBgdD5jACM8RMZhJ6nVy6xDhbcQyQuE" async defer></script>
+    <script type="text/javascript" src="//bitmovin-a.akamaihd.net/bitmovin-player/stable/7/bitmovinplayer.js"></script>
+    <script type="text/javascript" src="./static/js/script.js"></script>
+
+
+
 </body>
 
 

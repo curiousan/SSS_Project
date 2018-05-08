@@ -1,66 +1,339 @@
-<div class="top-bar container-fluid">
-    <nav class="navbar navbar-expand-sm bg-dark">
-        <a href="#" class="navbar-brand">Stream</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-controls="collapseMenu"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse nd-flex justify-content-end align-items-center" id="collapseMenu">
-            <ul class="navbar-nav wide-padded-list">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Home </a>
+<!-- video wrap begin here -->
+<div class="video-header wrap">
+    <div class="fullscreen-video-wrap">
+        <video src="./static/videos/dance.mp4" autoplay loop muted plays-inline></video>
+    </div>
+    <div class="header-overlay">
+        <div class="header-content">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Adaptive Media streaming</h1>
+                    <p class="lead text-muted">This app is all about Adaptive Media streaming that supports bitrate audio and video streaming that supports
+                        any devices, browser or bandwidth.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary my-2 ">View all videos</a>
 
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Videos </a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- video wrap ends here -->
+<!-- nav bar ends here -->
 
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Audios </a>
+<!-- Video modal-->
 
-                </li>
 
-                <li class="nav-item dropdown">
-                    <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{#if user.facebook.name}} {{user.facebook.name}} {{else}} {{user.local.name}} {{/if}}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">View Profile</a>
-                        <a class="dropdown-item" href="/logout">Logout</a>
+
+<!-- intro text container-->
+<div class="album py-5 bg-light content-section">
+
+
+    <!-- first container for feature video-->
+    <div class="row recent-video-section">
+        <div class="col-lg-4 main-info-section">
+            <h3>Adaptive bitrate Streaming</h3>
+            <img src="./static/images/stream.png" alt="" srcset="">
+            <div class="feature feture-lists">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <img src="./static/images/tick.png" alt="" srcset=""> bandwidth support</li>
+                    <li class="list-group-item">
+                        <img src="./static/images/tick.png" alt="" srcset=""> Any platform or device compatable</li>
+                    <li class="list-group-item">
+                        <img src="./static/images/tick.png" alt="" srcset=""> various resolution and bitrate</li>
+                    <li class="list-group-item">
+                        <img src="./static/images/tick.png" alt="" srcset=""> Non stop streaming</li>
+                    <li class="list-group-item">
+                        <img src="./static/images/tick.png" alt="" srcset=""> MPEG-DASH and HLS Streaming</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="col-lg-8 light-blue-background feature-videos">
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="video-title">Title</h4>
+                            <font face="verdana">Artist Name</font>
+                            </br>
+                            <font face="verdana">10 days ago</font>
+                            </br>
+                            <font face="verdana">100 Views</font>
+                            </br>
+                            <font face="verdana">This movie is awesome</font>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group" data-src="video/example.mp4">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary video-view " data-toggle="modal" data-target="#videoModal">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">delete</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
                     </div>
-                </li>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            </ul>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
         </div>
 
-    </nav>
+
+    </div>
+
+    <!-- feature video section done -->
+
+    <div class="container-fluid search-bar">
+        <!-- search bar for any videos -->
+        <div class="form-group  row">
+            <div class="col-sm-5 col-md-5">
+                <input type="text" class="form-control" id="search" name="search-query" placeholder="Search videos eg Avicii Levels">
+            </div>
+            <div class="col-sm-7 col-md-7">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <input type="text" class="form-control" placeholder="uploader username">
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-4">
+                        <input type="text" class="form-control" placeholder="category">
+
+                    </div>
+                    <div class="col-md-3">
+                        <button class="form-control btn btn-primary">Search</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="own-video-section">
+        <h3>Videos you have uploaded </h3>
+        <div class="row">
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 col-lg-3">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="./static/images/no-thumbnail.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                            content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
-
-<div class="container">
-    <div class="row items">
-        {{#each videos}}
-        <div class="col-md-6 col-lg-4 item">
-            <div class="image">
-                <img src="{{this.thumbSrc}}" alt="image">
-            </div>
-            <h2>{{this.title}}</h2>
-            <p>{{this.desc}}</p>
-            {{#if this.user}}
-            <p> uploaded by: {{this.user}}</p> {{/if}}
-
-            <!-- Button trigger modal -->
-            <div class="buttons">
-                <a href="/video/{{this._id}}">
-                    <button type="button" class="btn btn-primary">View
-                    </button>
-                </a>
-                <a href="/update/{{this._id}}">
-                    <button type="button" class="btn btn-info update-item">Update</button>
-                </a>
-                <input type="button" class="btn btn-danger delete-item" value="delete" onclick="deleteItem('{{this._id}}')"></input>
-            </div>
-        </div>
-        {{/each}}
-    </div>
 </div>
