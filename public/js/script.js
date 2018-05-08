@@ -1,39 +1,44 @@
 $(() => {
     let player;
-    const viewButton = document.querySelector('.video-view');
+    const viewButton = document.querySelectorAll('.video-view');
     const videoCloseButton = document.querySelector('.modal-close-button');
     const modal = document.querySelector('.modal');
-    $(document).scroll(function() {
+    $(document).scroll(function () {
         const $nav = $('.top-bar');
         $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
 
-    viewButton.addEventListener('click', (e) => {
-        player = bitmovin.player('my_player');
-        startStreaming(player);
-    });
+    for (let i = 0; i < viewButton.length; i++) {
+        viewButton[i].addEventListener('click', (e) => {
+            player = bitmovin.player('my_player');
+            getVideoData(e).then((video) => {
+                startStreaming(player, video);
+            });
+        });
+    }
+
 
     videoCloseButton.addEventListener('click', (e) => {
         stopStreaming(player);
     });
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = (event) =>{
-    if (event.target == modal) {
-        stopStreaming(player);
-    }
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            stopStreaming(player);
+        }
     };
 });
 
 
-const startStreaming = (player) => {
+const startStreaming = (player, video) => {
     const conf = {
         key: '72f9d43b-3018-48eb-a401-2c217688e54a',
         source: {
-            dash: 'https://d2kxths7qfsef9.cloudfront.net/dash/video-1525343031076-master.mpd',
-            hls: 'https://d2kxths7qfsef9.cloudfront.net/hls/video-1525343031076-master.m3u8',
-            progressive: 'https://',
-            poster: window.location.host+'/static/images/playback.jpg',
+            dash: 'https://' + video.dashSrc,
+            hls: 'https://' + video.hlsSrc,
+            progressive: 'https://' + video.progressiveSrc,
+            poster: video.thumbSrc,
         },
 
     };
@@ -43,10 +48,29 @@ const startStreaming = (player) => {
 };
 
 const stopStreaming = (player) => {
-     if (player.isSetup()) {
-         console.log('destroying the player');
-         return player.destroy();
+    if (player.isSetup()) {
+        console.log('destroying the player');
+        return player.destroy();
     }
     console.log('player is not set yet');
-};  
+};
+
+const getVideoData = (event) => {
+    const id = event.target.closest('.video-data-store').getAttribute('data-src');
+    return new Promise((resolve, reject) => {
+        console.log('calling endpoints ' + 'https://' + window.location.host + '/api/videos/' + id + '/');
+        fetch('https://' + window.location.host + '/api/videos/' + id + '/')
+            .then((data) => {
+                return data.json();
+            }).then((video) => {
+                    document.querySelector('.modal-title').innerText = video.title;
+                    document.querySelector('.model-video-info p:nth-child(1)').innerText = 'Category: ' + video.category,
+                    document.querySelector('.model-video-info p:nth-child(2)').innerText = 'Uploaded: ' + video.uploadedOn,
+                    document.querySelector('.model-video-info .video-numbers p:nth-child(1)').innerText = 'Views: ' + video.views,
+                    document.querySelector('.model-video-info .video-numbers p:nth-child(2)').innerText = 'Ratings ' + video.uploadedOn,
+                    document.querySelector('.model-video-info > p').innerText = video.desc;
+                resolve(video);
+            });
+    });
+};
 

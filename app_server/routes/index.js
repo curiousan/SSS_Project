@@ -24,32 +24,36 @@ const isLoggedOut = (req, res, next) => {
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', isLoggedIn, (req, res) => {
+router.get('/', (req, res) => {
     videoController.allVideos(req, (err, data) => {
+        const response = { videos: data };
+        if (req.isAuthenticated) {
+            response.user = req.user;
+        }
         if (err) return res.render('index', err);
-        return res.render('index', {videos: data, user: req.user});
+        return res.render('index', response);
     });
 });
 
 router.get('/video/:id', (req, res) => {
     videoController.singleVideo(req, (err, data) => {
-        if (err) return res.redirect('/', {vide0: data});
+        if (err) return res.redirect('/', { vide0: data });
         return res.render('player');
     });
 });
 
 
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('add', {user: req.user});
+    res.render('add', { user: req.user });
 });
 
 router.get('/printBuckets', isLoggedIn, (req, res) => {
     aws.listBucket();
-    res.render('index', {user: req.user});
+    res.render('index', { user: req.user });
 });
 
 router.get('/videos', isLoggedIn, (req, res) => {
-    res.render('video-details', {user: req.user});
+    res.render('video-details', { user: req.user });
 });
 
 //  --------- local routes -------------------------------------//
@@ -61,12 +65,12 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/login', isLoggedOut, (req, res) => {
-    res.render('login', {message: req.flash('loginMessage')});
+    res.render('login', { message: req.flash('loginMessage') });
 });
 
 
 router.get('/signup', isLoggedOut, (req, res) => {
-    res.render('signup', {message: req.flash('signUpMessage')});
+    res.render('signup', { message: req.flash('signUpMessage') });
 });
 
 router.post('/login', isLoggedOut, (req, res, next) => {

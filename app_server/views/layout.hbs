@@ -22,7 +22,7 @@
         <div class="modal-dialog .modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                 </div>
                 <div class="modal-body">
                     <div class="model-video" id="my_player">
@@ -30,19 +30,17 @@
                     <div class="model-video-info">
                         <div class="row">
                             <div class="col-sm-6">
-                                <p>Sandesh Poudel feat AKON</p>
-                                <p> Uploaded on 6 days ago</p>
-                                <p>Category: Entertainment</p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
                             </div>
 
-                            <div class="col-sm-6">
-                                <p>100 Views</p>
-                                <p>5 Rating </p>
+                            <div class="col-sm-6 video-numbers">
+                                <p></p>
+                                <p></p>
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, molestiae optio. Asperiores odit, ab
-                            corrupti rerum alias incidunt harum porro perspiciatis voluptatibus aut tempore optio omnis perferendis
-                            animi praesentium architecto!</p>
+                        <p></p>
                     </div>
                 </div>
 
@@ -56,7 +54,7 @@
     <!-- nav bar starts here-->
     <div class="top-bar container-fluid sticky-top">
         <nav class="navbar navbar-expand-sm ">
-            <a href="#" class="navbar-brand">Stream</a>
+            <a href="/" class="navbar-brand">Stream</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseMenu" aria-controls="collapseMenu"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -74,13 +72,21 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            Sandesh Poudel</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        
+                            {{#if user}}
+                           <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">{{#if user.local.username}} {{user.local.username}}  {{else}} {{user.facebook.name}} {{/if}}</a>
+                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">View Profile</a>
                             <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
+                            </div>
+                            {{else}}
+                            <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">  Register</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/signup">Sign Up</a>
+                            <a class="dropdown-item" href="/login">Login</a>
+                            {{/if}}
                     </li>
 
                 </ul>
