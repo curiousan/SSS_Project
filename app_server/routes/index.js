@@ -3,6 +3,7 @@ const router = express.Router();
 // const User = require('./../models/user');
 const passport = require('./../config/passport');
 const videoController = require('./../controller/videoController');
+const jwt = require('jsonwebtoken');
 // const utilities = require('./../models/utilities');
 
 // a simple function to check if the user is logged in
@@ -23,7 +24,7 @@ const isLoggedOut = (req, res, next) => {
 
 router.get('/', (req, res) => {
     videoController.allVideos(req, (err, data) => {
-        const response = { videos: data };
+        const response = {videos: data};
         if (req.isAuthenticated) {
             response.currentUser = req.user;
         }
@@ -38,28 +39,30 @@ router.get('/video/:id', (req, res) => {
             console.log(req.user);
 
     videoController.singleVideo(req, (err, data) => {
-        if (err) return res.redirect('/', { video: data });
+        if (err) return res.redirect('/', {video: data});
         return res.render('player');
     });
 });
 
 
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('add', { currentUser: req.user });
+    res.render('add', {currentUser: req.user});
 });
+
+router.get('/update/:id', isLoggedIn, videoController.updateInterface);
+
 
 router.get('/printBuckets', isLoggedIn, (req, res) => {
     console.log(req.user);
-
     aws.listBucket();
-    res.render('index', { currentUser: req.user });
+    res.render('index', {currentUser: req.user});
 });
 
 router.get('/videos', (req, res) => {
     console.log(req.user);
 
     videoController.allVideos(req, (err, data) => {
-        const response = { videos: data };
+        const response = {videos: data};
         if (req.isAuthenticated) {
             response.currentUser = req.user;
         }
@@ -77,12 +80,12 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/login', isLoggedOut, (req, res) => {
-    res.render('login', { message: req.flash('loginMessage') });
+    res.render('login', {message: req.flash('loginMessage')});
 });
 
 
 router.get('/signup', isLoggedOut, (req, res) => {
-    res.render('signup', { message: req.flash('signUpMessage') });
+    res.render('signup', {message: req.flash('signUpMessage')});
 });
 
 router.post('/login', isLoggedOut, (req, res, next) => {
@@ -90,6 +93,8 @@ router.post('/login', isLoggedOut, (req, res, next) => {
         if (err || !user) return res.redirect('/login');
         req.login(user, (err) => {
             if (err) return res.redirect('/login');
+            const token = jwt.sign(user, 'somesecret');
+            res.cookie('token', token, {maxAge: 1000});
             return res.redirect('/');
         });
     })(req, res, next);

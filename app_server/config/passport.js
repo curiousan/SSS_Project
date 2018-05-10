@@ -2,7 +2,10 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook');
-
+const jwt = require('jsonwebtoken');
+const passportJWT = require('passport-jwt');
+const JWTStrategy = passportJWT.Strategy;
+const extractJWT = passportJWT.ExtractJwt;
 
 
 // load the user model
@@ -55,7 +58,9 @@ passport.use('facebook', new FacebookStrategy({
                      });
 
                      newUser.save((err, user) => {
+                         
                          if (err) throw err;
+
                          return done(null, user);
                      });
                 }
@@ -106,6 +111,23 @@ passport.use('local-signup', new LocalStrategy({
         });
     });
 }
+
+));
+
+
+// JWT Strategy
+passport.use(new JWTStrategy({
+    jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: 'somesecret',
+}, ((jwtPayload, cb)=>{
+    return User.findById(jwtPayload.id)
+        .then((user) => {
+            return cb(null, user);
+        }).catch((err) => {
+            return cb(err);
+        });
+})
+
 
 ));
 

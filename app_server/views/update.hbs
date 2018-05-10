@@ -1,0 +1,34 @@
+<div class="container-fluid item-upload">
+    <div class="row">
+        <form class="col-md-8 video-data-store" data-src="{{video.id}}">
+            <div class="form-group">
+                <label for="#video-title">
+                    <Title></Title>
+                </label>
+                <input type="text" class="form-control" id="video-title" name="video-title" value="{{video.title}}">
+            </div>
+            <div class="form-group video-data-store" >
+                <label for="#video-category">Category</label>
+                <select name="video-category" class="form-control video-category" id="video-category">
+                    <option> Entertainment</option>
+                    <option>Music videos</option>
+                    <option> Documentry</option>
+                    <option>Movies</option>
+                    <option>Travel and Vlogs</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="#video-artists">Artist/owner</label>
+                <input type="text" class="form-control video-artists" id="artist" name="video-artists" value="{{video.artists}}">
+            </div>
+
+            <div class="form-group">
+                <label for="#video-desc">Description</label> </br>
+                <textarea type="text" name="desc"  class="form-control video-desc" id="video-desc" rows="10" style="min-width: 100%">{{video.desc  }}</textarea>
+            </div>
+
+            <input type="button" class="btn btn-primary update-video-button"  value="update">
+        </form>
+    </div>
+</div>

@@ -3,8 +3,15 @@ $(() => {
     const viewButton = document.querySelectorAll('.video-view');
     const videoCloseButton = document.querySelector('.modal-close-button');
     const videoDeleteButton = document.querySelectorAll('.btn-video-delete');
+    const renderUpdateViewButton = document.querySelectorAll('.btn-video-edit');
+    const updateVideoButton = document.querySelectorAll('.update-video-button');
+
+
+    addUpdateEvent(renderUpdateViewButton);
 
     addDeleteEvent(videoDeleteButton);
+
+    callVideoUpdate(updateVideoButton);
 
     const modal = document.querySelector('.modal');
     $(document).scroll(function() {
@@ -85,14 +92,67 @@ const addDeleteEvent = (elements)=> {
             const url = 'api/videos/'+e.target.closest('.video-data-store').getAttribute('data-src');
             const params = {
                 method: 'DELETE',
+                credentials: 'include',
             };
-
             fetch(url, params)
             .then((data) =>{
                 return data.body;
             }).then((e) =>{
                 console.log(e);
                 window.location.href= '/';
+            });
+        });
+    }
+};
+
+const addUpdateEvent = (elements)=> {
+    console.log(elements);
+    for (let i = 0; i< elements.length; i++) {
+        elements[i].addEventListener('click', (e)=>{
+            const id = e.target.closest('.video-data-store').getAttribute('data-src');
+            const url = location.protocol+'//'+location.host+'/update/'+id;
+            window.location = url;
+        });
+    }
+};
+
+const callVideoUpdate = (elements)=> {
+    console.log(elements);
+    for (let i = 0; i< elements.length; i++) {
+        elements[i].addEventListener('click', (e)=>{
+            const parentNode = e.target.closest('.video-data-store');
+            const id = parentNode.getAttribute('data-src');
+            const title = parentNode.querySelector('#video-title').value;
+            const category = parentNode.querySelector('#video-category').value;
+            const artist = parentNode.querySelector('.video-artists').value;
+            const desc = parentNode.querySelector('.video-desc').value;
+            const payloadBody = JSON.stringify({
+                'title': title,
+                'category': category,
+                'artists': [artist],
+                'desc': desc,
+            });
+
+            console.log(payloadBody);
+            const params = {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: payloadBody,
+
+            };
+
+            console.log(params);
+
+            fetch(location.protocol+'//'+location.host+'/api/videos/'+id+'', params)
+            .then((data) =>{
+                return data.text;
+            }).then((video) =>{
+                console.log(video);
+               // window.location = location.protocol+'//'+location.host+'/'
             });
         });
     }

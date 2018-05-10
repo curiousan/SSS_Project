@@ -50,10 +50,45 @@ module.exports.addNewVideo = (req, res) => {
     });
 };
 
-// update the existing videos
-module.exports.updateVideo = (req, res) => {
-    return Video.findOne({id: req.params.id}, (err, video) => {
+// render the update interface
+module.exports.updateInterface = (req, res) => {
+    return Video.findOne({_id: req.params.id}, (err, data) => {
         if (err) return errHandler(err);
+        if (req.user) {
+            const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
+            if (username === data.user) {
+               return res.render('update', {currentUser: req.user, video: data});
+            }
+         }
+         return res.status(401).send('ERR: Please make you sure you are the owner of video');
+    });
+};
+
+
+// update the current video
+
+module.exports.updateVideo = (req, res) =>{
+    console.log('got request to update video '+ req.params.id);
+    console.log(req.body);
+
+    return Video.findOne({_id: req.params.id}, (err, video) => {
+        if (err) return errHandler(err);
+        if (req.user) {
+
+            const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
+            if (username === video.user) {
+              return Video.findByIdAndUpdate({_id: req.params.id}, req.body, {upsert: true}, (err, updatedVideo)=>{
+                   if (err) {
+                       errHandler(err);
+                       return res.send(err);
+                    }
+                   return res.send(updatedVideo);
+               });
+            }
+         }   
+            res.status(401).send('Please authorize yourself');
+         
+         
     });
 };
 
@@ -68,12 +103,14 @@ module.exports.deleteVideo = (req, res) => {
         if (req.user) {
             const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
             if (username === data.user) {
-                return Video.findOneAndRemove({id: req.params.id}, (err, video) =>{
+                console.log('deleting  video with id: '+req.params.id);
+
+                return Video.remove({_id: req.params.id}, (err, video) =>{
                     if (err) return errHandler(err);
                     return res.json(video);
                 });
             }
-            } 
+    }
 
         res.status(401).send('ERR: Please make you sure you are the owner of video');
     });
