@@ -61,9 +61,7 @@ typings/
 # next.js build output
 .next
 
-#images and videos
-public/images/
-public/videos/
+
 
 #certificates
 ssl*
