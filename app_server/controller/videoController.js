@@ -55,7 +55,7 @@ module.exports.updateInterface = (req, res) => {
     return Video.findOne({_id: req.params.id}, (err, data) => {
         if (err) return errHandler(err);
         if (req.user) {
-            const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
+            const username = req.user.facebook? req.user.facebook.email: req.user.local.email;
             if (username === data.user) {
                return res.render('update', {currentUser: req.user, video: data});
             }
@@ -75,7 +75,7 @@ module.exports.updateVideo = (req, res) =>{
         if (err) return errHandler(err);
         if (req.user) {
 
-            const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
+            const username = req.user.facebook? req.user.facebook.email: req.user.local.email;
             if (username === video.user) {
               return Video.findByIdAndUpdate({_id: req.params.id}, req.body, {upsert: true}, (err, updatedVideo)=>{
                    if (err) {
@@ -101,7 +101,7 @@ module.exports.deleteVideo = (req, res) => {
             return res.json(err);
         }
         if (req.user) {
-            const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
+            const username = req.user.facebook? req.user.facebook.email: req.user.local.email;
             if (username === data.user) {
                 console.log('deleting  video with id: '+req.params.id);
 

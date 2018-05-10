@@ -82,13 +82,13 @@ module.exports.upload = multer({storage: storage});
 // uploading file to aws,
 module.exports.uploadfile = (req, cb) => {
     const fileKey = req.file.filename.replace(/\.[^/.]+$/, '');
-    const username = req.user.local.name ? req.user.local.name : req.user.facebook.name;
+    const useremail = req.user.local.email ? req.user.local.email : req.user.facebook.email;
     const newVideo = new Video({
         title: req.body['video-title'],
         category: req.body['video-category'],
         artists: req.body['video-artists'],
         desc: req.body.desc,
-        user: username,
+        user: useremail,
         progressiveSrc: fileKey,
         dashSrc: process.env.CLOUDFRONT_URL + '/dash/' + fileKey + '-master.mpd',
         hlsSrc: process.env.CLOUDFRONT_URL + '/hls/' + fileKey + '-master.m3u8',

@@ -75,7 +75,7 @@
                         
                             {{#if currentUser}}
                            <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">{{#if currentUser.local.username}} {{currentUser.local.username}}  {{else}} {{currentUser.facebook.name}} {{/if}}</a>
+                            aria-expanded="false">{{#if currentUser.local.email}} {{currentUser.local.email}}  {{else}} {{currentUser.facebook.email}} {{/if}}</a>
                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">View Profile</a>
                             <a class="dropdown-item" href="/add">Add new Media</a>
