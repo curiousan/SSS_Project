@@ -63,7 +63,7 @@
                 <ul class="navbar-nav wide-padded-list">
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Videos </a>
+                        <a href="/videos" class="nav-link">Videos </a>
 
                     </li>
                     <li class="nav-item">
@@ -73,11 +73,12 @@
 
                     <li class="nav-item dropdown">
                         
-                            {{#if user}}
+                            {{#if currentUser}}
                            <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">{{#if user.local.username}} {{user.local.username}}  {{else}} {{user.facebook.name}} {{/if}}</a>
+                            aria-expanded="false">{{#if currentUser.local.username}} {{currentUser.local.username}}  {{else}} {{currentUser.facebook.name}} {{/if}}</a>
                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">View Profile</a>
+                            <a class="dropdown-item" href="/add">Add new Media</a>
                             <a class="dropdown-item" href="/logout">Logout</a>
                             </div>
                             {{else}}
@@ -86,6 +87,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/signup">Sign Up</a>
                             <a class="dropdown-item" href="/login">Login</a>
+                            
                             {{/if}}
                     </li>
 

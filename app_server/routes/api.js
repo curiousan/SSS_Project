@@ -2,9 +2,8 @@
 // importing the required dependecies //
 const express = require('express');
 const router = express.Router();
+const passport = require('./../config/passport');
 const videoController = require('./../controller/videoController');
-
-
 // /----- api endpoints ----/
 
 // get all the videos

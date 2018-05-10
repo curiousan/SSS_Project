@@ -10,11 +10,10 @@ const hbs = require('./app_server/hbsHelper/dashboard')(hb);
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const api = require('./app_server/routes/api');
-const index = require('./app_server/routes/index');
 const https = require('https');
 const http = require('http');
 const DB = require('./app_server/config/db');
+const passport = require('./app_server/config/passport');
 
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -49,6 +48,24 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.use(flash());
+
+// end points handlers
+
+
+// handle bars setup
+app.engine('hbs', hbs.engine);
+
+// set custom templating engine to handlebars
+app.set('view engine', 'hbs');
+
+
+
+
+// all middleware for express
+app.set('views', path.join(__dirname, 'app_server', 'views'));
+app.use('/static', express.static('public'));
+
 // passport js setup
 app.use(session({
     name: 'app.sess',
@@ -58,24 +75,14 @@ app.use(session({
     }),
     secret: 'somesecret', resave: false, saveUninitialized: false,
     cookie: {maxAge: 1000 * 60 * 15},
-}
-));
-app.use(flash());
+}));
 
-// handle bars setup
-app.engine('hbs', hbs.engine);
+app.use(passport.initialize());
+app.use(passport.session());
 
-// set custom templating engine to handlebars
-app.set('view engine', 'hbs');
+app.use('/api', require('./app_server/routes/api'));
+app.use('/', require('./app_server/routes/index'));
 
-// all middleware for express
-app.set('views', path.join(__dirname, 'app_server', 'views'));
-app.use('/static', express.static('public'));
-
-// end points handlers
-
-app.use('/', index);
-app.use('/api', api);
 
 
 // catch 404 and forward to error handlers

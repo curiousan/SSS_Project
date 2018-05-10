@@ -4,13 +4,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook');
 
 
+
 // load the user model
 const User = require('./../models/user');
 
 // load all the methods on modal user
 
 // export this functionality to our app
-
 // used to serialize the user for the session
 passport.serializeUser((user, done) => {
     done(null, user.id);

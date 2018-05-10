@@ -2,8 +2,12 @@ $(() => {
     let player;
     const viewButton = document.querySelectorAll('.video-view');
     const videoCloseButton = document.querySelector('.modal-close-button');
+    const videoDeleteButton = document.querySelectorAll('.btn-video-delete');
+
+    addDeleteEvent(videoDeleteButton);
+
     const modal = document.querySelector('.modal');
-    $(document).scroll(function () {
+    $(document).scroll(function() {
         const $nav = $('.top-bar');
         $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
     });
@@ -67,10 +71,30 @@ const getVideoData = (event) => {
                     document.querySelector('.model-video-info p:nth-child(1)').innerText = 'Category: ' + video.category,
                     document.querySelector('.model-video-info p:nth-child(2)').innerText = 'Uploaded: ' + video.uploadedOn,
                     document.querySelector('.model-video-info .video-numbers p:nth-child(1)').innerText = 'Views: ' + video.views,
-                    document.querySelector('.model-video-info .video-numbers p:nth-child(2)').innerText = 'Ratings ' + video.uploadedOn,
+                    document.querySelector('.model-video-info .video-numbers p:nth-child(2)').innerText = 'Ratings ' + video.ratings,
                     document.querySelector('.model-video-info > p').innerText = video.desc;
                 resolve(video);
             });
     });
+};
+
+const addDeleteEvent = (elements)=> {
+    console.log(elements);
+    for (let i = 0; i< elements.length; i++) {
+        elements[i].addEventListener('click', (e)=>{
+            const url = 'api/videos/'+e.target.closest('.video-data-store').getAttribute('data-src');
+            const params = {
+                method: 'DELETE',
+            };
+
+            fetch(url, params)
+            .then((data) =>{
+                return data.body;
+            }).then((e) =>{
+                console.log(e);
+                window.location.href= '/';
+            });
+        });
+    }
 };
 

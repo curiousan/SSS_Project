@@ -5,8 +5,15 @@ const hbsHelpers = (hbs) => {
         defaultLayout: 'layout',
         layoutsDir: __dirname + './../views',
         helpers: {
-            test: ()=>{
-                return 'test';
+            test: (test)=>{
+                return test+ 'sucessed';
+            },
+            ownVideo: (currentUser, mediaOwner) =>{
+                const username = currentUser.facebook ? currentUser.facebook.name : currentUser.local.name;
+                if (mediaOwner === username) {
+                    return '<button  type="button" class="btn btn-sm btn-outline-secondary btn-video-edit">Edit</button><button type="button" class="btn btn-sm btn-outline-secondary btn-video-delete">delete</button>';
+                }
+                return '';
             },
         },
 });

@@ -21,14 +21,11 @@ const isLoggedOut = (req, res, next) => {
     return next();
 };
 
-router.use(passport.initialize());
-router.use(passport.session());
-
 router.get('/', (req, res) => {
     videoController.allVideos(req, (err, data) => {
         const response = { videos: data };
         if (req.isAuthenticated) {
-            response.user = req.user;
+            response.currentUser = req.user;
         }
         if (err) return res.render('index', err);
         return res.render('index', response);
@@ -36,24 +33,39 @@ router.get('/', (req, res) => {
 });
 
 router.get('/video/:id', (req, res) => {
+    console.log(req.user);
+
+            console.log(req.user);
+
     videoController.singleVideo(req, (err, data) => {
-        if (err) return res.redirect('/', { vide0: data });
+        if (err) return res.redirect('/', { video: data });
         return res.render('player');
     });
 });
 
 
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('add', { user: req.user });
+    res.render('add', { currentUser: req.user });
 });
 
 router.get('/printBuckets', isLoggedIn, (req, res) => {
+    console.log(req.user);
+
     aws.listBucket();
-    res.render('index', { user: req.user });
+    res.render('index', { currentUser: req.user });
 });
 
-router.get('/videos', isLoggedIn, (req, res) => {
-    res.render('video-details', { user: req.user });
+router.get('/videos', (req, res) => {
+    console.log(req.user);
+
+    videoController.allVideos(req, (err, data) => {
+        const response = { videos: data };
+        if (req.isAuthenticated) {
+            response.currentUser = req.user;
+        }
+        if (err) return res.render('index', err);
+        return res.render('video-details', response);
+    });
 });
 
 //  --------- local routes -------------------------------------//

@@ -52,18 +52,29 @@ module.exports.addNewVideo = (req, res) => {
 
 // update the existing videos
 module.exports.updateVideo = (req, res) => {
-    return Video.findOne({ id: req.params.id }, (err, video) => {
+    return Video.findOne({id: req.params.id}, (err, video) => {
         if (err) return errHandler(err);
     });
 };
 
 
-
 // delete the existing videos
-
 module.exports.deleteVideo = (req, res) => {
-    return Video.findOneAndRemove({ id: req.params.id }, (err, video) => {
-        if (err) return errHandler(err);
-        return res.json(video);
+    console.log(req.user);
+    return Video.findById(req.params.id, (err, data)=>{
+        if (err) {
+            return res.json(err);
+        }
+        if (req.user) {
+            const username = req.user.facebook? req.user.facebook.name: req.user.local.name;
+            if (username === data.user) {
+                return Video.findOneAndRemove({id: req.params.id}, (err, video) =>{
+                    if (err) return errHandler(err);
+                    return res.json(video);
+                });
+            }
+            } 
+
+        res.status(401).send('ERR: Please make you sure you are the owner of video');
     });
 };

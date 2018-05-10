@@ -135,7 +135,23 @@ body{
     z-index: 10;
 
 }
+.card-body ul li {
+  list-style: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  position: relative;
+  left: -5px;
 
+}
+.card-body h5 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+}
+
+.card-body{
+  padding: 2%;
+  position: relative;
+}
 .nav-item{
     margin-left: 1em;
     
