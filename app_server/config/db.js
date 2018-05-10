@@ -7,10 +7,10 @@ class Database {
   }
 
 
-  connect(url, app, options, https) {
+  connect(url, app, options, http) {
     this.mongoose.connect(url).then(() => {
       console.log('Connected successfully.');
-      https.createServer(options, app).listen(3000);
+      http.createServer(options, app).listen(3000);
     }, (err) => {
       console.log('Connection to db failed: ' + err);
     });

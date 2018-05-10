@@ -10,7 +10,6 @@ const hbs = require('./app_server/hbsHelper/dashboard')(hb);
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const https = require('https');
 const http = require('http');
 const DB = require('./app_server/config/db');
 const passport = require('./app_server/config/passport');
@@ -38,7 +37,7 @@ const mongoStore = process.env.MLAB_STORE;
 
 // connect to database and start listening on port 3000
 // TODO: .env for URL of db server?
-DB.connect(`mongodb://${mongoUser}:${mongoPass}@ds163119.mlab.com:63119/${mongoStore}`, app, options, https);
+DB.connect(`mongodb://${mongoUser}:${mongoPass}@ds163119.mlab.com:63119/${mongoStore}`, app, options, http);
 
 
 // set up express app
@@ -103,9 +102,3 @@ app.use((err, req, res, next) => {
     res.send(err.message);
 });
 
-
-http.createServer((req, res) => {
-res.writeHead(301, {
-    'Location': 'https://localhost:3000'+req.url});
-    res.end();
-}).listen(8080);
