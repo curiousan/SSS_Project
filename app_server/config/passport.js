@@ -37,7 +37,7 @@ passport.deserializeUser((id, done) => {
 passport.use('facebook', new FacebookStrategy({
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
-    callbackURL: 'https://localhost:3000/auth/facebook/callback',
+    callbackURL: 'https://stream-transcoder.herokuapp.com/auth/facebook/callback',
     profileURL: 'https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email',
     profileFields: ['id', 'email', 'name'],
 
