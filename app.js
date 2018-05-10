@@ -7,7 +7,6 @@ const express = require('express');
 const app = express();
 const hb = require('express-handlebars');
 const hbs = require('./app_server/hbsHelper/dashboard')(hb);
-const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const http = require('http');
@@ -22,22 +21,14 @@ const cookieParser = require('cookie-parser');
 const MongodbStore = require('connect-mongo')(session);
 
 
-// ssl setup
-const sslkey = fs.readFileSync('./ssl-key.pem');
-const sslcert = fs.readFileSync('./ssl-cert.pem');
-const options = {
-    key: sslkey,
-    cert: sslcert,
-    requestCert: false,
-    rejectUnauthorized: false,
-};
+
 const mongoUser = process.env.MLAB_USER;
 const mongoPass = process.env.MLAB_PASS;
 const mongoStore = process.env.MLAB_STORE;
 
 // connect to database and start listening on port 3000
 // TODO: .env for URL of db server?
-DB.connect(`mongodb://${mongoUser}:${mongoPass}@ds163119.mlab.com:63119/${mongoStore}`, app, options, http);
+DB.connect(`mongodb://${mongoUser}:${mongoPass}@ds163119.mlab.com:63119/${mongoStore}`, app, http);
 
 
 // set up express app
