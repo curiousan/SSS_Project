@@ -19,7 +19,7 @@ module.exports.getAllUser = (req, res)=>{
 };
 
 module.exports.getUserByEmail = (req, res)=>{
-    return User.find({$or: [{'local.email': req.query.value},{'facebook.email': req.query.value}]},
+    return User.find({$or: [{'local.email': req.query.value}, {'facebook.email': req.query.value}]},
     (err, user) =>{
       if (err) {
         return errHandler(err);

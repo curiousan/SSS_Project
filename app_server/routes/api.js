@@ -344,9 +344,82 @@ router.get('videos/search/', videoController.getVideosByKeywords);
 */
 
 // get all user
+
+/**
+ * @api {get} /users/ get the list of users
+ * @apiName getUsers
+ * @apiGroup Users
+ * @apiSuccess {Object[]} users The list of the all the registered users
+ * @apiSuccess {String} users.facebook.id videos id of the user
+ * @apiSuccess {String} users.facebook.token auth token of the user if there is any
+ * @apiSuccess {String} users.facebook.name name of the user
+ * @apiSuccess {String} users._id unique identification of the video
+ * @apiSuccess {String} users.facebook.email email of the facebook authenticated users
+ * @apiSuccess {String} users.local.username username of the locally authenticated user
+ * @apiSuccess {String} users.local.email Email of the locally authenticated user
+ * @apiSuccess {String} users.local.password the password of local user
+ * @apiSuccess {String} users.local.name name of the local user if any
+ * @apiSuccessExample {json} users:
+ *      [{
+ * 
+ * 
+ *     "facebook": {
+ *        "id": "1230985313671181",
+ *       "token": "EAAPu5exLka0BAGgaG8vivVdPNqJ29f0tTie10n95f4miN1frrOXttHr9Ah6TOSsnZBQFOoJ0QfkY68UaTynTAqxyQcbZAY1iMvRcqJDz1ZBtKmZCrxnqIUXlvtS2uSuW7NN6YcFZAu7YC9N4GbWD3DdthBz0vgxYAqUTKflwQwQZDZD",
+ *        "name": "Sandesh Poudel",
+ *            "email": "curious.sandesh@gmail.com"
+ *    },
+ *    "_id": "5aeac45a7e79f7064b5f96a8",
+ *    "__v": 0
+ *},
+ *{
+ *   "local": {
+ *       "username": "sandeshp",
+ *      "email": "sandesh.poudel@metropolia.fi",
+ *        "password": "$2a$08$b35fvIiW.WCHHfc/DdoSzewr/3IVupRD5uJlY3tzq0gohF10qhZLS",
+ *        "name": "Sandesh Poudel"
+ *    },
+ *    "_id": "5af32b87beb06218959ace05",
+ *    "__v": 0
+ *   }]
+ */
 router.get('/users', userController.getAllUser);
 
 // get specific user
+
+/**
+ * @api {get} /users/email/  user with the email
+ * @apiName getUserById
+ * @apiGroup Users
+ * @apiParam {String} value pass the email as query param
+ * @apiSuccess {Object} users the result of the user by id
+ * @apiSuccess {String} users.facebook.id videos id of the user
+ * @apiSuccess {String} users.facebook.token auth token of the user if there is any
+ * @apiSuccess {String} users.facebook.name name of the user
+ * @apiSuccess {String} users._id unique identification of the video
+ * @apiSuccess {String} users.facebook.email email of the facebook authenticated users
+ * @apiSuccess {String} users.local.username username of the locally authenticated user
+ * @apiSuccess {String} users.local.email Email of the locally authenticated user
+ * @apiSuccess {String} users.local.password the password of local user
+ * @apiSuccess {String} users.local.name name of the local user if any
+ * @apiSuccessExample {json} users:
+ *      {
+    *    "facebook": {
+    *        "id": "1230985313671181",
+    *       "token": "EAAPu5exLka0BAGgaG8vivVdPNqJ29f0tTie10n95f4miN1frrOXttHr9Ah6TOSsnZBQFOoJ0QfkY68UaTynTAqxyQcbZAY1iMvRcqJDz1ZBtKmZCrxnqIUXlvtS2uSuW7NN6YcFZAu7YC9N4GbWD3DdthBz0vgxYAqUTKflwQwQZDZD",
+    *        "name": "Sandesh Poudel",
+    *        "email": "curious.sandesh@gmail.com"
+    *    },
+    *    "_id": "5aeac45a7e79f7064b5f96a8",
+    *    "__v": 0
+    *   }
+*@@apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "UserNotFound"
+ *      } 
+*
+ */
 router.get('/users/email/', userController.getUserByEmail);
 
 

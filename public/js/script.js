@@ -152,7 +152,7 @@ const callVideoUpdate = (elements)=> {
                 return data.text;
             }).then((video) =>{
                 console.log(video);
-               // window.location = location.protocol+'//'+location.host+'/'
+                window.location = location.protocol+'//'+location.host+'/'
             });
         });
     }

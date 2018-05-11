@@ -71,7 +71,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/apiDoc', (req, res)=>{
-    res.redirect('/static/apiDoc');
+    res.redirect('/static/apidoc/');
 });
 
 app.use('/api', require('./app_server/routes/api'));

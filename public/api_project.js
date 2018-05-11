@@ -1,0 +1,1 @@
+define({  "name": "Stream API-Documentation",  "version": "1.0.0",  "description": "Documentation of stream API",  "template": {    "forceLanguage": "en"  },  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2018-05-11T11:17:34.188Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }});
