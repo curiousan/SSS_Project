@@ -115,3 +115,18 @@ module.exports.deleteVideo = (req, res) => {
         res.status(401).send('ERR: Please make you sure you are the owner of video');
     });
 };
+
+// get videos list by category
+module.exports.getVideoByCategory = (param)=>{
+return Video.find({'category': param}, (err, res)=>{
+  if (err) return errHandler(err);
+    return res;
+});
+};
+
+// get videos list by keywords
+module.exports.getVideosByKeywords = (keyword)=>{
+
+};
+
+

@@ -70,6 +70,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/apiDoc', (req, res)=>{
+    res.redirect('/static/apiDoc');
+});
+
 app.use('/api', require('./app_server/routes/api'));
 app.use('/', require('./app_server/routes/index'));
 

@@ -10,6 +10,7 @@
   "author": "sandesh poudel",
   "license": "ISC",
   "dependencies": {
+    "apidoc": "^0.17.6",
     "aws-sdk": "^2.227.1",
     "bcrypt-node": "^0.1.0",
     "body-parser": "^1.18.2",

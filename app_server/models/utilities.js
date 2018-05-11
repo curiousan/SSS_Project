@@ -20,7 +20,9 @@ function errHandler(err) {
     return UserModel.create({
       email: req.body.email,
       password: req.body.password,
-      }, function(err, user) {
+      name: req.body.name,
+      username: req.body.username,
+      }, (err, user) =>{
         if (err) {
           console.error('There was an error creating the user');
           console.error(err.code);

@@ -1,0 +1,8 @@
+{
+    "name": "Stream API-Documentation",
+    "version": "1.0.0",
+    "description": "Documentation of stream API",
+    "template": {
+        "forceLanguage": "en"
+    }
+}
