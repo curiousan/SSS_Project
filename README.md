@@ -2,7 +2,7 @@
 
 stream is an adaptive bitrate streaming service that allows user to upload any media (both video and audios) and stream them adaptively.
 It leverages the power of aws elastic transcoder to encode media into multipul format.
-[https://stream-transcoder.herokuapp.com/) - The app link
+[https://stream-transcoder.herokuapp.com/] - The app link
 
 ## Getting Started
 Login is optional in to get access to the dozons of medias already available. Howver, if you want to add your your own video user should be 
@@ -21,12 +21,31 @@ it has nice bitmovin player for streaming the media.
 
  
 ### Media Quality
-currently it supports media upto 4k resolution and generate following different media files
+currently it supports media upto 4k resolution and generate following different streaming protocol and media quality
+
+#### MEPG_DASH
+This streaming protocol is supported all of the devices accept few apple devices. The uploaded video will be transocoded to following resolution and bitrate.
+
+1. 4800k Bitrate 1280 720
+1. 2400k Bitrate  854 480
+1. 600k Bitrate  
+1. 128k Bitrate audio
+1. Thumbnails 600 600
+
+
+#### HLS
+Http live streaming developed by apple. It supports few devices that are not supported by dash. The uploaded video will be transcoded to following resolution and bitrate
+1. 1872k Bitrate 1024 768
+1. 1372k Bitrate 960 640
+1. 900k Bitrate 640 480
+1. 600k Bitrate 480 320
+1. 160k HSL audio
+
 
 ### Api and documentation
 Stream has pulic API with nice documentation.
-[https://stream-transcoder.herokuapp.com/api) - The api endpoints
-[https://stream-transcoder.herokuapp.com/apidocs) - The api documetation
+[https://stream-transcoder.herokuapp.com/api] - The api endpoints
+[https://stream-transcoder.herokuapp.com/apidocs] - The api documetation
 
 
 ```
@@ -35,33 +54,22 @@ Give examples
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+just clone the project, install all the dependecies using npm install. provide all the Environental variables and your run npm start. Your app should be listening on port 3000 unless specified on env.PORT.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
 
 ```
-until finished
+npm start or node app.js
 ```
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
 ```
-Give an example
+npm test
 ```
+
 
 ### And coding style tests
 
@@ -72,35 +80,29 @@ Give an example
 ```
 
 ## Deployment
-
-Add additional notes about how to deploy this on a live system
-
+optimized to deploy in heroku 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [aws-transcoder](http://www.aws.amazon.com/) - The aws cloud 
+* [bitmovin](https://bitmovin.com/) - Bitmovin player
+* [Exoresss](https:/expressjs.com/) - Express application
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Sandesh Poudel** - *Initial work* - [PurpleBooth](https://github.com/curiousan)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+
