@@ -1,23 +1,22 @@
-# Stream - Adaptive bitrate  media streaming
+## Stream web app - Adaptive bitrate  media streaming service
 
-stream is an adaptive bitrate streaming service that allows user to upload any media (both video and audios) and stream them adaptively.
+stream web app is an adaptive bitrate streaming service that allows user to upload any media (both video and audios) and stream them adaptively.
 It leverages the power of aws elastic transcoder to encode media into multipul format.
 [https://stream-transcoder.herokuapp.com/] - The app link
 
-## Getting Started
+## Web application
 Login is optional in to get access to the dozons of medias already available. Howver, if you want to add your your own video user should be 
-logged in. Stream supports both local authentication or third party facebook authorization. Once user is logged in they can upload any media files
-they want and to CRUD operations on those objects.
+logged in. Stream supports both local authentication or third party facebook authorization. Once user is logged in they can upload any media files they want and to CRUD operations on those files.
 
 
 ### implementation details
-stream is express application that make use of passportjs for local and facebook authorization for the authentication service.
+stream is expressJs application that make use of passportjs for local and facebook authorization for the authentication service.
 File uploading services is provided by express-multer.
 
 Once user uploades that media on server, that file will automatically uploaded to 
 the aws s3-bucket. The event handler that is attached while file is uploaded to AWS bucket calls the lamda function 
-whose job is to transcode the media into hundreds of small files with different format and quality and thumbnails. On the web
-it has nice bitmovin player for streaming the media.
+whose job is to transcode the media into hundreds of small files with different format and quality and thumbnails. 
+it has nice bitmovin player for streaming the media on the web pages.
 
  
 ### Media Quality
@@ -48,9 +47,6 @@ Stream has pulic API with nice documentation.
 [https://stream-transcoder.herokuapp.com/apidocs] - The api documetation
 
 
-```
-Give examples
-```
 
 ### Installing
 
@@ -70,22 +66,13 @@ End with an example of getting some data out of the system or using it for a lit
 npm test
 ```
 
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 optimized to deploy in heroku 
 ## Built With
 
 * [aws-transcoder](http://www.aws.amazon.com/) - The aws cloud 
 * [bitmovin](https://bitmovin.com/) - Bitmovin player
-* [Exoresss](https:/expressjs.com/) - Express application
+* [ExpressJs](https:/expressjs.com/) - Express application
 
 ## Contributing
 
@@ -97,7 +84,7 @@ optimized to deploy in heroku
 
 ## Authors
 
-* **Sandesh Poudel** - *Initial work* - [PurpleBooth](https://github.com/curiousan)
+* **Sandesh Poudel** (https://github.com/curiousan)
 
 
 ## License
