@@ -6,12 +6,13 @@
     <div class="header-overlay">
         <div class="header-content">
             <section class="jumbotron text-center">
-                <div class="container">
+                <div class="container text-primary">
                     <h1 class="jumbotron-heading">Adaptive Media streaming</h1>
-                    <p class="lead text-muted">This app is all about Adaptive Media streaming that supports bitrate audio and video streaming that supports
+                    <p class="lead">This app is all about Adaptive Media streaming that supports bitrate
+                        audio and video streaming that supports
                         any devices, browser or bandwidth.</p>
                     <p>
-                        <a href="/videos" class="btn btn-primary my-2 ">View all videos</a>
+                        <a href="/videos" id="viewAll" class="btn btn-danger my-2 p-3">View all videos</a>
 
                     </p>
                 </div>
@@ -32,64 +33,98 @@
 
     <!-- first container for feature video-->
     <div class="row recent-video-section">
-        <div class="col-lg-4 main-info-section">
-            <h3>Adaptive bitrate Streaming</h3>
-            <img src="./static/images/stream.png" alt="" srcset="">
-            <div class="feature feture-lists">
+        <div class="col-md-4 main-info-section">
+            <h3 class="text-center">Adaptive bitrate Streaming</h3>
+            <img src="./static/images/stream.png" alt="some random picture about adaptive streaming" srcset="">
+            <div class="feature">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <img src="./static/images/tick.png" alt="" srcset=""> bandwidth support</li>
-                    <li class="list-group-item">
-                        <img src="./static/images/tick.png" alt="" srcset=""> Any platform or device compatable</li>
-                    <li class="list-group-item">
-                        <img src="./static/images/tick.png" alt="" srcset=""> various resolution and bitrate</li>
-                    <li class="list-group-item">
-                        <img src="./static/images/tick.png" alt="" srcset=""> Non stop streaming</li>
-                    <li class="list-group-item">
-                        <img src="./static/images/tick.png" alt="" srcset=""> MPEG-DASH and HLS Streaming</li>
+                    <li class="list-group-item py-0">
+                        <div class="row">
+                            <div class="col-1"><img src="./static/images/tick.png" class="tick-fluid" alt="tick"
+                                    srcset=""></div>
+                            <div class="col-11">
+                                <p class="my-2">Bandwidth support</p>
+                            </div>
+                        </div>
+                    </li>
 
+                    <li class="list-group-item py-0">
+                        <div class="row">
+                            <div class="col-1"><img src="./static/images/tick.png" class="tick-fluid" alt="tick"
+                                    srcset=""></div>
+                            <div class="col-11">
+                                <p class="my-2">Any platform or device compatible</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item py-0">
+                        <div class="row">
+                            <div class="col-1"><img src="./static/images/tick.png" class="tick-fluid" alt="tick"
+                                    srcset=""></div>
+                            <div class="col-11">
+                                <p class="my-2">Various resolution and bitrate</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item py-0">
+                        <div class="row">
+                            <div class="col-1"> <img src="./static/images/tick.png" class="tick-fluid" alt="tick"
+                                    srcset=""></div>
+                            <div class="col-11">
+                                <p class="my-2">Non-stop streaming</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item py-0">
+                        <div class="row">
+                            <div class="col-1"><img src="./static/images/tick.png" class="tick-fluid" alt="tick"
+                                    srcset=""></div>
+                            <div class="col-11">
+                                <p class="my-2">MPEG-DASH and HLS Streaming</p>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
-
             </div>
 
         </div>
-        <div class="col-lg-8 light-blue-background feature-videos">
+        <div class="col-md-8 light-blue-background feature-videos">
             <div class="row">
                 {{#each videos}}
-                <div class="col-sm-6 col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="video-title">{{this.title}}</h5>
-                            <ul>
-                               <li>
-                                {{#each this.artists}}
-                                <span class="artist artist-name">{{this}}</span>
-                                {{/each}}
-                                </li>
-                            
-                            <li>{{this.uploadedOn}} </li>
-                            
-                            <li>{{this.views}} Views </li>
-                            <li>uploaded by: {{this.user}} </li>
-                            
-                           <li> <p>{{this.desc}}<p> </li>
-                             </ul>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="video-data-store" data-src="{{this.id}}">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary video-view " data-toggle="modal" data-target="#videoModal">View</button>
-                                        {{#if @root.currentUser}}
-                                        {{{ownVideo @root.currentUser this.user}}}
-
-                                        {{/if}}
+                    <div class=" col-6 col-sm-4 col-md-6 col-lg-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="video-title">{{this.title}}</h5>
+                                <ul class="video-detail">
+                                    <li><strong>Artist(s): </strong>
+                                        {{#each this.artists}}
+                                            <span class="artist artist-name">{{this}}</span>
+                                        {{/each}}
+                                    </li>
+                                    <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
+                                    <li><strong>Uploaded by: </strong>{{this.user}}</li>
+                                    <li class="text-secondary">{{this.views}} Views</li>
+                                    <li>{{this.desc}}</li>
+                                </ul>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="video-data-store" data-src="{{this.id}}">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-danger video-view "
+                                                data-toggle="modal" data-target="#videoModal">View</button>
+                                            {{#if @root.currentUser}}
+                                                {{{ownVideo @root.currentUser this.user}}}
+                                            {{/if}}
+                                        </div>
                                     </div>
+                                    <small class="text-muted">{{this.length}} min</small>
                                 </div>
-                                <small class="text-muted">{{this.length}} min</small>
                             </div>
                         </div>
                     </div>
-                </div>
                 {{/each}}
             </div>
         </div>
@@ -101,74 +136,66 @@
 
     <div class="container-fluid search-bar">
         <!-- search bar for any videos -->
-        <div class="form-group  row">
+        <div class="row">
             <div class="col-sm-5 col-md-5">
-                <input type="text" class="form-control" id="search" name="search-query" placeholder="Search videos eg Avicii Levels">
+                <input type="text" class="form-control" id="search" name="search-query"
+                    placeholder="Search videos e.g. 4K">
             </div>
             <div class="col-sm-7 col-md-7">
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-5">
-                        <input type="text" class="form-control" placeholder="uploader username">
+                        <input type="text" class="form-control" placeholder="Uploader username">
                     </div>
                     <div class="col-sm-6 col-md-3 col-lg-4">
-                        <input type="text" class="form-control" placeholder="category">
-
+                        <input type="text" class="form-control" placeholder="Category">
                     </div>
                     <div class="col-md-3">
-                        <button class="form-control btn btn-primary">Search</button>
-
+                        <button class="form-control btn btn-lg btn-primary">Search</button>
                     </div>
-
                 </div>
-
             </div>
         </div>
-
     </div>
 
     <div class="own-video-section">
         <h3>Videos you have uploaded </h3>
         <div class="row">
             {{#each videos}}
-                <div class="col-sm-6 col-md-3">
+                <div class="col-6 col-sm-4 col-md-4 col-lg-3">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="video-title">{{this.title}}</h5>
-                            <ul>
-                               <li>
-                                {{#each this.artists}}
-                                <span class="artist artist-name">{{this}}</span>
-                                {{/each}}
+                            <ul class="video-detail">
+                                <li><strong>Artist(s): </strong>
+                                    {{#each this.artists}}
+                                        <span class="artist artist-name">{{this}}</span>
+                                    {{/each}}
                                 </li>
-                            
-                            <li>{{this.uploadedOn}} </li>
-                             <li>uploaded by: {{this.user}} </li>
-
-                            <li>{{this.views}} Views </li>
-                            
-                           <li> <p>{{this.desc}}<p> </li>
-                             </ul>
+                                <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
+                                <li><strong>Uploaded by: </strong>{{this.user}}</li>
+                                <li class="text-secondary">{{this.views}} Views</li>
+                                <li>{{this.desc}}</li>
+                            </ul>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="video-data-store" data-src="{{this.id}}">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary video-view " data-toggle="modal" data-target="#videoModal">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger video-view "
+                                            data-toggle="modal" data-target="#videoModal">View</button>
                                         {{#if @root.currentUser}}
-                                        {{{ownVideo @root.currentUser this.user}}}
-
+                                            {{{ownVideo @root.currentUser this.user}}}
                                         {{/if}}
-                                    </div>  
+                                    </div>
                                 </div>
                                 <small class="text-muted">{{this.length}} min</small>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{/each}}
+            {{/each}}
 
         </div>
 
     </div>
 
-</div>
 </div>
