@@ -140,6 +140,11 @@ nav a {
   text-align: center;
 }
 
+footer {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .footer-copyright{
   font-size: .8em;
   line-height: .8em;
@@ -218,21 +223,6 @@ nav a {
   margin: 2em;
 } 
 
-
-/* .navbar{
-    z-index: 10;
-} */
-
 .nav-item{
     margin-left: 1em;
-}
-
-footer {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  
-  footer p {
-    margin-bottom: .25rem;
-  }
-  
+}  
