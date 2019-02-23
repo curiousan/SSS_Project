@@ -8,125 +8,130 @@ const jwt = require('jsonwebtoken');
 
 // a simple function to check if the user is logged in
 const isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    return res.redirect('/login');
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.redirect('/login');
 };
 
 // a simple function to check if the user is logged in
 const isLoggedOut = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return res.redirect('/');
-    }
-    return next();
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  return next();
 };
 
 router.get('/', (req, res) => {
-    videoController.allVideos(req, (err, data) => {
-        const response = {videos: data};
-        if (req.isAuthenticated) {
-            response.currentUser = req.user;
-        }
-        if (err) return res.render('index', err);
-        return res.render('index', response);
-    });
+  videoController.allVideos(req, (err, data) => {
+    // for (let video of data) {
+    //     video.uploadedOn = video.uploadedOn.toDateString();
+    //   console.log(video.uploadedOn);
+    // }
+    const response = {videos: data};
+    if (req.isAuthenticated) {
+      response.currentUser = req.user;
+    }
+    if (err) return res.render('index', err);
+
+    return res.render('index', response);
+  });
 });
 
 router.get('/video/:id', (req, res) => {
-    console.log(req.user);
+  console.log(req.user);
 
-            console.log(req.user);
+  console.log(req.user);
 
-    videoController.singleVideo(req, (err, data) => {
-        if (err) return res.redirect('/', {video: data});
-        return res.render('player');
-    });
+  videoController.singleVideo(req, (err, data) => {
+    if (err) return res.redirect('/', {video: data});
+    return res.render('player');
+  });
 });
 
-
 router.get('/add', isLoggedIn, (req, res) => {
-    res.render('add', {currentUser: req.user});
+  res.render('add', {currentUser: req.user});
 });
 
 router.get('/update/:id', isLoggedIn, videoController.updateInterface);
 
-
 router.get('/printBuckets', isLoggedIn, (req, res) => {
-    console.log(req.user);
-    aws.listBucket();
-    res.render('index', {currentUser: req.user});
+  console.log(req.user);
+  aws.listBucket();
+  res.render('index', {currentUser: req.user});
 });
 
 router.get('/videos', (req, res) => {
-    console.log(req.user);
+  console.log(req.user);
 
-    videoController.allVideos(req, (err, data) => {
-        const response = {videos: data};
-        if (req.isAuthenticated) {
-            response.currentUser = req.user;
-        }
-        if (err) return res.render('index', err);
-        return res.render('video-details', response);
-    });
+  videoController.allVideos(req, (err, data) => {
+    const response = {videos: data};
+    if (req.isAuthenticated) {
+      response.currentUser = req.user;
+    }
+    if (err) return res.render('index', err);
+    return res.render('video-details', response);
+  });
 });
 
 //  --------- local routes -------------------------------------//
 
 router.get('/logout', (req, res) => {
-    req.logout();
-    req.session.destroy();
-    return res.redirect('/login');
+  req.logout();
+  req.session.destroy();
+  return res.redirect('/login');
 });
 
 router.get('/login', isLoggedOut, (req, res) => {
-    res.render('login', {message: req.flash('loginMessage')});
+  res.render('login', {message: req.flash('loginMessage')});
 });
 
-
 router.get('/signup', isLoggedOut, (req, res) => {
-    res.render('signup', {message: req.flash('signUpMessage')});
+  res.render('signup', {message: req.flash('signUpMessage')});
 });
 
 router.post('/login', isLoggedOut, (req, res, next) => {
-    passport.authenticate('local-login', (err, user, info) => {
-        if (err || !user) return res.redirect('/login');
-        req.login(user, (err) => {
-            if (err) return res.redirect('/login');
-            const token = jwt.sign(user, 'somesecret');
-            res.cookie('token', token, {maxAge: 1000});
-            return res.redirect('/');
-        });
-    })(req, res, next);
+  passport.authenticate('local-login', (err, user, info) => {
+    if (err || !user) return res.redirect('/login');
+    req.login(user, (err) => {
+      if (err) return res.redirect('/login');
+      const token = jwt.sign(user, 'somesecret');
+      res.cookie('token', token, {maxAge: 1000});
+      return res.redirect('/');
+    });
+  })(req, res, next);
 });
 
-
 router.post('/signup', isLoggedOut, (req, res, next) => {
-    passport.authenticate('local-signup', (err, user, info) => {
-        console.log('authentication called');
-        if (err || !user) return res.redirect('/signup');
-        req.login(user, (err) => {
-            if (err) return res.redirect('/signup');
-            return res.redirect('/');
-        });
-    })(req, res, next);
+  passport.authenticate('local-signup', (err, user, info) => {
+    console.log('authentication called');
+    if (err || !user) return res.redirect('/signup');
+    req.login(user, (err) => {
+      if (err) return res.redirect('/signup');
+      return res.redirect('/');
+    });
+  })(req, res, next);
 });
 
 // facebook routes
 
 // ----------- route for facebook authentication and login ---------//
 
-router.get('/auth/facebook', passport.authenticate('facebook', {
+router.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', {
     scope: ['public_profile', 'email'],
-}));
-
+  })
+);
 
 // ---facebook callback routes ------
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+router.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', {
     successRedirect: '/',
     failureRedirect: '/login',
-}));
-
+  })
+);
 
 module.exports = router;
 module.exports.isLoggedIn = isLoggedIn;
