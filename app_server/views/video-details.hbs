@@ -3,41 +3,37 @@
         <h3> Music Videos </h3>
         <div class="row">
             {{#each videos}}
-            <div class="col-sm-6 col-md-3">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
-                    <div class="card-body">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
+                        <div class="card-body">
                             <h5 class="video-title">{{this.title}}</h5>
-                            <ul>
-                               <li>
-                                {{#each this.artists}}
-                                <span class="artist artist-name">{{this}}</span>
-                                {{/each}}
+                            <ul class="video-detail">
+                                <li>
+                                    {{#each this.artists}}
+                                        <span class="artist artist-name">{{this}}</span>
+                                    {{/each}}
                                 </li>
-                            
-                            <li>{{this.uploadedOn}} </li>
-                            <li>uploaded by: {{this.user}} </li>
-
-                            
-                            <li>{{this.views}} Views </li>
-                            
-                           <li> <p>{{this.desc}}<p> </li>
-                             </ul>
+                                <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
+                                <li><strong>Uploaded by: </strong>{{this.user}}</li>
+                                <li class="text-secondary">{{this.views}} Views</li>
+                                <li>{{this.desc}}</li>
+                            </ul>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="video-data-store" data-src="{{this.id}}">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary video-view " data-toggle="modal" data-target="#videoModal">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger video-view "
+                                            data-toggle="modal" data-target="#videoModal">View</button>
                                         {{#if @root.currentUser}}
-                                        {{{ownVideo @root.currentUser this.user}}}
-
+                                            {{{ownVideo @root.currentUser this.user}}}
                                         {{/if}}
                                     </div>
                                 </div>
                                 <small class="text-muted">{{this.length}} min</small>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
             {{/each}}
         </div>
     </div>
@@ -46,39 +42,36 @@
         <h3> Music Videos </h3>
         <div class="row">
             {{#each videos}}
-            <div class="col-sm-6 col-md-3">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
-                    <div class="card-body">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
+                        <div class="card-body">
                             <h5 class="video-title">{{this.title}}</h5>
-                            <ul>
-                               <li>
-                                {{#each this.artists}}
-                                <span class="artist artist-name">{{this}}</span>
-                                {{/each}}
+                            <ul class="video-detail">
+                                <li>
+                                    {{#each this.artists}}
+                                        <span class="artist artist-name">{{this}}</span>
+                                    {{/each}}
                                 </li>
-                            
-                            <li>{{this.uploadedOn}} </li>
-                            
-                            <li>{{this.views}} Views </li>
-                            
-                           <li> <p>{{this.desc}}<p> </li>
-                             </ul>
+                                <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
+                                <li class="text-secondary">{{this.views}} Views</li>
+                                <li>{{this.desc}}</li>
+                            </ul>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="video-data-store" data-src="{{this.id}}">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary video-view " data-toggle="modal" data-target="#videoModal">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger video-view "
+                                            data-toggle="modal" data-target="#videoModal">View</button>
                                         {{#if @root.currentUser}}
-                                        {{{ownVideo @root.currentUser this.user}}}
-
+                                            {{{ownVideo @root.currentUser this.user}}}
                                         {{/if}}
                                     </div>
                                 </div>
                                 <small class="text-muted">{{this.length}} min</small>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
             {{/each}}
         </div>
     </div>
@@ -87,39 +80,36 @@
         <h3> Movies </h3>
         <div class="row">
             {{#each videos}}
-            <div class="col-sm-6 col-md-3">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
-                    <div class="card-body">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
+                        <div class="card-body">
                             <h5 class="video-title">{{this.title}}</h5>
-                            <ul>
-                               <li>
-                                {{#each this.artists}}
-                                <span class="artist artist-name">{{this}}</span>
-                                {{/each}}
+                            <ul class="video-detail">
+                                <li>
+                                    {{#each this.artists}}
+                                        <span class="artist artist-name">{{this}}</span>
+                                    {{/each}}
                                 </li>
-                            
-                            <li>{{this.uploadedOn}} </li>
-                            
-                            <li>{{this.views}} Views </li>
-                            
-                           <li> <p>{{this.desc}}<p> </li>
-                             </ul>
+                                <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
+                                <li class="text-secondary">{{this.views}} Views</li>
+                                <li>{{this.desc}}</li>
+                            </ul>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="video-data-store" data-src="{{this.id}}">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary video-view " data-toggle="modal" data-target="#videoModal">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger video-view "
+                                            data-toggle="modal" data-target="#videoModal">View</button>
                                         {{#if @root.currentUser}}
-                                        {{{ownVideo @root.currentUser this.user}}}
-
+                                            {{{ownVideo @root.currentUser this.user}}}
                                         {{/if}}
                                     </div>
                                 </div>
                                 <small class="text-muted">{{this.length}} min</small>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
             {{/each}}
 
         </div>
