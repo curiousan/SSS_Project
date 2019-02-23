@@ -35,9 +35,6 @@ nav a {
   line-height: 1.1em;
 }
 
-.album{
-}
-
 .tick-fluid{
   position: relative;
   margin-top:.5em;
@@ -69,10 +66,6 @@ nav a {
   background: rgb(54, 51, 51);
 }
 
-/* .content-section div{
-  padding: 1%;
-} */
-
 .fullscreen-video-wrap {
   position: absolute;
   top: 0;
@@ -85,7 +78,26 @@ nav a {
   height: 100%; 
 }
 
+.devices-image{
+  max-width: 100%;
+  height: auto;
+}
+
+.feature li {
+  font-family: 'Cantarell', sans-serif;
+  font-size: 20px;
+}
+
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.light-blue-background{
+  background-color: rgba(220, 242, 248, 0.288);
+  padding: 2%;
+}
+
+.card img {
+  height: 170px;
+}
 
 .card-body ul li {
   list-style: none;
@@ -133,10 +145,36 @@ nav a {
   line-height: .8em;
 }
 
+@media (min-width:1200px){
+  .devices-image{
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 450px){
+  .feature li {
+    font-family: 'Cantarell', sans-serif;
+    font-size: 16px;
+  }
+  .devices-image{
+    max-width: 85%;
+    height: auto;
+  }
+}
+
 @media(max-width: 767px) {
   .header-overlay {
     display: none;
   }
+  
+  .devices-image{
+    max-width: 75%;
+    height: auto;
+  }
+  .feature-section{
+    justify-content: center !important;
+  }
+  
 
 }
 
@@ -160,10 +198,6 @@ nav a {
     font-weight: 300;
   }
 
-  .card img {
-    max-height: 170px;
-  }
-
   .jumbotron .container {
     max-width: 40rem;
   }
@@ -183,10 +217,7 @@ nav a {
   text-align: center;
   margin: 2em;
 } 
-.light-blue-background{
-  background-color: rgba(220, 242, 248, 0.288);
-  padding: 2%;
-}
+
 
 /* .navbar{
     z-index: 10;

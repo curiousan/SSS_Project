@@ -1,4 +1,5 @@
 'use strict';
+const dayjs = require('dayjs');
 const hbsHelpers = (hbs) => {
   return hbs.create({
     extname: 'hbs',
@@ -16,8 +17,11 @@ const hbsHelpers = (hbs) => {
         return '';
       },
       formatDateTime: (date) => {
-        return date.toDateString();
+        return dayjs(date).format('DD MMM, YYYY');
       },
+      fixDesc: (string) =>{
+        return string.substring(0,27).concat('..');
+      }
     },
   });
 };
