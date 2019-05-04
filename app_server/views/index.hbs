@@ -26,7 +26,6 @@
 <!-- Video modal-->
 
 
-
 <!-- intro text container-->
 <div class="bg-light py-5">
     <!-- first container for feature video-->
@@ -37,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-5 col-lg-5">
                         <img src="./static/images/devices.png" class="devices-image mt-4 ml-2"
-                            alt="some random picture about adaptive streaming" srcset="">
+                             alt="some random picture about adaptive streaming" srcset="">
                     </div>
                     <div class="col-md-7 col-lg-7">
                         <div class="feature">
@@ -45,7 +44,7 @@
                                 <li class="list-group-item bg-light"><strong>✔ Bandwidth support</strong>
                                 </li>
                                 <li class="list-group-item bg-light"><strong>✔ Any platform or device
-                                        compatible</strong>
+                                    compatible</strong>
                                 </li>
                                 <li class="list-group-item bg-light"><strong>✔ Various resolution and bitrate</strong>
                                 </li>
@@ -68,7 +67,7 @@
         <div class="row">
             <div class="col-sm-5 col-md-5">
                 <input type="text" class="form-control" id="search" name="search-query"
-                    placeholder="Search videos e.g. 4K">
+                       placeholder="Search videos e.g. 4K">
             </div>
             <div class="col-sm-7 col-md-7">
                 <div class="row">
@@ -110,7 +109,8 @@
                                     <div class="video-data-store" data-src="{{this.id}}">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-danger video-view "
-                                                data-toggle="modal" data-target="#videoModal">View</button>
+                                                    data-toggle="modal" data-target="#videoModal">View
+                                            </button>
                                             {{#if @root.currentUser}}
                                                 {{{ownVideo @root.currentUser this.user}}}
                                             {{/if}}
@@ -126,10 +126,20 @@
         </div>
     </div>
 
-    <div class="own-video-section">
+<div class="own-video-section">
+    {{log this}}
+    {{#if currentUser}}
         <h3>Videos you have uploaded </h3>
+        {{#unless myVideos.length}}
+            <div class="no-video-section">
+            <div class="alert alert-info">
+                <strong>No Media Under Your account! </strong>
+                Please upload <strong><a href="/add"> here</a></strong>
+            </div>
+            </div>
+        {{/unless}}
         <div class="row">
-            {{#each videos}}
+            {{#each myVideos}}
                 <div class="col-6 col-sm-4 col-md-4 col-lg-3">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
@@ -150,7 +160,8 @@
                                 <div class="video-data-store" data-src="{{this.id}}">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-danger video-view "
-                                            data-toggle="modal" data-target="#videoModal">View</button>
+                                                data-toggle="modal" data-target="#videoModal">View
+                                        </button>
                                         {{#if @root.currentUser}}
                                             {{{ownVideo @root.currentUser this.user}}}
                                         {{/if}}
@@ -166,5 +177,6 @@
         </div>
 
     </div>
+    {{/if}}
 
 </div>
