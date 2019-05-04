@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-5 col-lg-5">
                         <img src="./static/images/devices.png" class="devices-image mt-4 ml-2"
-                             alt="some random picture about adaptive streaming" srcset="">
+                            alt="some random picture about adaptive streaming" srcset="">
                     </div>
                     <div class="col-md-7 col-lg-7">
                         <div class="feature">
@@ -44,7 +44,7 @@
                                 <li class="list-group-item bg-light"><strong>✔ Bandwidth support</strong>
                                 </li>
                                 <li class="list-group-item bg-light"><strong>✔ Any platform or device
-                                    compatible</strong>
+                                        compatible</strong>
                                 </li>
                                 <li class="list-group-item bg-light"><strong>✔ Various resolution and bitrate</strong>
                                 </li>
@@ -92,7 +92,7 @@
                 {{#each videos}}
                     <div class="col-sm-6 col-md-4 col-xl-3">
                         <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
+                            <img class="card-img-top" src="{{this.thumbSrc}}" alt="Video thumbnail">
                             <div class="card-body">
                                 <h5 class="video-title">{{this.title}}</h5>
                                 <ul class="video-detail">
@@ -109,8 +109,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="video-data-store" data-src="{{this.id}}">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-danger video-view "
-                                                    data-toggle="modal" data-target="#videoModal">View
+                                            <button type="button" class="btn btn-sm btn-outline-danger video-view mr-2"
+                                                data-toggle="modal" data-target="#videoModal">View
                                             </button>
                                             {{#if @root.currentUser}}
                                                 {{{ownVideo @root.currentUser this.user}}}
@@ -127,54 +127,58 @@
         </div>
     </div>
 
-<div class="own-video-section">
-    {{#if currentUser}}
-        <h3>Videos you have uploaded </h3>
-        {{#unless myVideos.length}}
-            <div class="no-video-section">
-            <div class="alert alert-info">
-                <strong>No Media Under Your account! </strong>
-                Please upload <strong><a href="/add"> here</a></strong>
-            </div>
-            </div>
-        {{/unless}}
-        <div class="row">
-            {{#each myVideos}}
-                <div class="col-6 col-sm-4 col-md-4 col-lg-3">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="{{this.thumbSrc}}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="video-title">{{this.title}}</h5>
-                            <ul class="video-detail">
-                                <li><strong>Artist(s): </strong>
-                                    {{#each this.artists}}
-                                        <span class="artist artist-name">{{this}}</span>
-                                    {{/each}}
-                                </li>
-                                <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
-                                <li><strong>Uploaded by: </strong>{{this.user}}</li>
-                                <li class="text-secondary">{{this.views}} Views</li>
-                                <li>{{this.desc}}</li>
-                            </ul>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="video-data-store" data-src="{{this.id}}">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-danger video-view "
+
+    {{!-- own video section --}}
+    <div class="own-video-section">
+        {{#if currentUser}}
+            <h3>Videos you have uploaded </h3>
+            {{#unless myVideos.length}}
+                <div class="no-video-section">
+                    <div class="alert alert-info">
+                        <strong>No Media Under Your account! </strong>
+                        Please upload <strong><a href="/add"> here</a></strong>
+                    </div>
+                </div>
+            {{/unless}}
+            <div class="row">
+                {{#each myVideos}}
+                    <div class="col-sm-6 col-md-4 col-xl-3">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="{{this.thumbSrc}}" alt="Video thumbnail">
+                            <div class="card-body">
+                                <h5 class="video-title">{{this.title}}</h5>
+                                <ul class="video-detail">
+                                    <li><strong>Artist(s): </strong>
+                                        {{#each this.artists}}
+                                            <span class="artist artist-name">{{this}}</span>
+                                        {{/each}}
+                                    </li>
+                                    <li><strong>Uploaded on:</strong> {{formatDateTime this.uploadedOn}}</li>
+                                    <li><strong>Uploaded by: </strong>{{this.user}}</li>
+                                    <li class="text-secondary">{{this.views}} Views</li>
+                                    <li>{{this.desc}}</li>
+                                </ul>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="video-data-store" data-src="{{this.id}}">
+                                        <div class="btn-group">
+                                            <button type="button"
+                                                class="btn btn-sm btn-outline-danger video-view mr-2">>>>>>> Stashed
+                                                changes
                                                 data-toggle="modal" data-target="#videoModal">View
-                                        </button>
-                                        {{#if @root.currentUser}}
-                                            {{{ownVideo @root.currentUser this.user}}}
-                                        {{/if}}
+                                            </button>
+                                            {{#if @root.currentUser}}
+                                                {{{ownVideo @root.currentUser this.user}}}
+                                            {{/if}}
+                                        </div>
                                     </div>
+                                    <small class="text-muted">{{this.length}} min</small>
                                 </div>
-                                <small class="text-muted">{{this.length}} min</small>
                             </div>
                         </div>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
 
-        </div>
+            </div>
 
     </div>
     {{/if}}

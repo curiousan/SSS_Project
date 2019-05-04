@@ -2,33 +2,34 @@
     <div class="row">
         <form class="col-md-8 video-data-store" data-src="{{video.id}}">
             <div class="form-group">
-                <label for="#video-title">
-                    <Title></Title>
-                </label>
+                <label for="#video-title">Title</label>
                 <input type="text" class="form-control" id="video-title" name="video-title" value="{{video.title}}">
             </div>
-            <div class="form-group video-data-store" >
+            <div class="form-group video-data-store">
                 <label for="#video-category">Category</label>
-                <select name="video-category" class="form-control video-category" id="video-category">
+                <select name="video-category" class="form-control video-category" id="video-category"
+                    class="form-control">
                     <option> Entertainment</option>
                     <option>Music videos</option>
-                    <option> Documentry</option>
+                    <option> Documentary</option>
                     <option>Movies</option>
-                    <option>Travel and Vlogs</option>
-
+                    <option>Travel and Vlog</option>
+                    <option>Technology</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="#video-artists">Artist/owner</label>
-                <input type="text" class="form-control video-artists" id="artist" name="video-artists" value="{{video.artists}}">
+                <label for="#video-artists">Artist/Owner</label>
+                <input type="text" class="form-control video-artists" id="artist" name="video-artists"
+                    value="{{video.artists}}">
             </div>
 
             <div class="form-group">
                 <label for="#video-desc">Description</label> </br>
-                <textarea type="text" name="desc"  class="form-control video-desc" id="video-desc" rows="10" style="min-width: 100%">{{video.desc  }}</textarea>
+                <textarea type="text" name="desc" class="form-control video-desc" id="video-desc"
+                    rows="5">{{video.desc }}</textarea>
             </div>
 
-            <input type="button" class="btn btn-primary update-video-button"  value="update">
+            <input type="button" class="btn btn-success px-4 update-video-button" value="Update">
         </form>
     </div>
 </div>
