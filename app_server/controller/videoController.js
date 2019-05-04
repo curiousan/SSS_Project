@@ -114,9 +114,7 @@ module.exports.deleteVideo = (req, res) => {
             return res.json(err);
         }
         if (req.user) {
-            const username = req.user.facebook
-                ? req.user.facebook.email
-                : req.user.local.email;
+            const username = req.user.facebook.email || req.user.local.email;
             if (username === data.user) {
                 console.log('deleting  video with id: ' + req.params.id);
 
@@ -127,8 +125,7 @@ module.exports.deleteVideo = (req, res) => {
             }
         }
 
-        res
-            .status(401)
+        res.status(401)
             .send('ERR: Please make you sure you are the owner of video');
     });
 };

@@ -8,7 +8,6 @@ const S3 = new AWS.S3();
 const Video = require('./../models/video');
 const ffprobe = require('ffprobe');
 const ffprobeStatic = require('ffprobe-static');
-
 // functions
 const extension = (filename) => {
     let ext = path.extname(filename || '').split('.');
@@ -111,9 +110,7 @@ module.exports.uploadfile = (req, cb) => {
                     };
                     S3.putObject(params, (err, data) => {
                         if (!err) {
-                            
-                           
-                            fs.unlink(req.file.path);
+                            fs.unlinkSync(req.file.path);
                             resolve('file uploaded to s3');
                         } else {
                             reject(err);
