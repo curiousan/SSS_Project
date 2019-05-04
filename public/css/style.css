@@ -491,6 +491,11 @@ tr.del td {
   -webkit-animation-delay: -0.2s;
   animation-delay: -0.2s;
 }
+.no-video-section{
+  text-align: center;
+  max-height: 80%;
+  margin: auto;
+}
 
 .container3 .circle4 {
   -webkit-animation-delay: -0.1s;
