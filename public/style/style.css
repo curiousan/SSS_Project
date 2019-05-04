@@ -10,6 +10,15 @@ body{
     overflow: hidden;
 }
 
+.navbar-toggler{
+  border-color: rgba(0,0,0,0.1);
+  border-radius: 0;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 /* temporary green. later on black after fixing video in the background of landing page */
 nav a {
   color: #ff6347;
@@ -21,6 +30,9 @@ nav a {
 
 .nav-link:hover{
   color: #7a6316;
+}
+.dropdown-item{
+  color: #ff6347;
 }
 .dropdown-item:hover{
   color: #7a6316;
@@ -150,6 +162,73 @@ footer {
   line-height: .8em;
 }
 
+.form-container {
+  margin: 10vh auto 0.5em;
+  width: 55%;
+  box-shadow: 0 0 3px 1px rgb(163, 162, 162);
+}
+
+.signup-login {
+  padding: 1.5em 2em;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+.signup-login button {
+  width: 150px;
+  border-radius: 0;
+}
+
+#fb-btn{
+  width: 200px;
+  background-color: rgba(45, 45, 163, 0.877);
+}
+.form-buttom {
+  background-color: rgb(224, 224, 224);
+  padding: 1.5em;
+  text-align: center;
+}
+
+/* large */
+ @media (max-width: 1199px) {
+   .form-container {
+     width: 40%;
+   }
+ }
+
+@media (max-width: 991px) {
+  .form-container {
+    width: 50%;
+  }
+}
+
+/* small */
+@media (max-width: 778px) {
+  .form-container {
+    width: 65%;
+  }
+}
+
+/* smaller */
+@media (max-width: 576px) {
+  .form-container {
+    width: 70%;
+  }
+}
+
+/* extra small */
+@media (max-width: 414px) {
+  .form-container {
+    width: 95%;
+  }
+  .signup-login {
+    padding: 1.5em 1.5em;
+  }
+}
+
+
 @media (min-width:1200px){
   .devices-image{
     max-width: 80%;
@@ -171,7 +250,6 @@ footer {
   .header-overlay {
     display: none;
   }
-  
   .devices-image{
     max-width: 75%;
     height: auto;
@@ -179,8 +257,6 @@ footer {
   .feature-section{
     justify-content: center !important;
   }
-  
-
 }
 
   @media (min-width: 768px) {
