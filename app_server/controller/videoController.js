@@ -55,8 +55,9 @@ module.exports.addNewVideo = (req, res) => {
     upload.single('video')(req, res, (err) => {
         if (err) return res.send(err);
         aws.uploadfile(req, (err, msg) => {
-            if (err) return res.send(err);
-            return res.send(msg);
+            if (err) req.flash('err_msg', err);
+            if (msg) req.flash('info_msg', msg);
+            return res.redirect('/');
         });
     });
 };
@@ -119,14 +120,21 @@ module.exports.deleteVideo = (req, res) => {
                 console.log('deleting  video with id: ' + req.params.id);
 
                 return Video.remove({_id: req.params.id}, (err, video) => {
-                    if (err) return errHandler(err);
-                    return res.json(video);
+                    if (err) {
+                        req.flash('err_msg', err.toString());
+                        res.redirect('/')
+                    }
+                    req.flash('info_msg', `video with id ${req.params.id} deleted successfully`);
+                    return res.redirect('/');
+
                 });
             }
+        } else {
+            req.flash('err_msg', 'oops failed!!!, please make sure you own this video');
+            res.redirect('/')
         }
 
-        res.status(401)
-            .send('ERR: Please make you sure you are the owner of video');
+
     });
 };
 

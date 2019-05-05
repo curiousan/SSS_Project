@@ -27,7 +27,10 @@ router.get('/', (req, res) => {
         //     video.uploadedOn = video.uploadedOn.toDateString();
         //   console.log(video.uploadedOn);
         // }
+
         const response = {videos: data};
+        response.flash_info = req.flash('info_msg');
+        response.flash_err = req.flash('err_msg');
         if (req.isAuthenticated()) {
             response.currentUser = req.user;
             return videoController.myVideos(req.user, (err, data) => {

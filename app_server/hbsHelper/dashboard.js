@@ -20,7 +20,8 @@ const hbsHelpers = (hbs) => {
         return dayjs(date).format('DD MMM, YYYY');
       },
       fixDesc: (string) => {
-        return string.substring(0, 27).concat('..');
+        if (string) return string.substring(0, 27).concat('..');
+        return ''
       },
     },
   });
