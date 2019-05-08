@@ -18,6 +18,11 @@ $(() => {
     $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
   });
 
+  $(document).ready(function() {
+    const $nav = $('.top-bar');
+    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+  });
+
   for (let i = 0; i < viewButton.length; i++) {
     viewButton[i].addEventListener('click', (e) => {
       player = bitmovin.player('my_player');
