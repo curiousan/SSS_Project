@@ -80,67 +80,57 @@ module.exports.upload = multer({storage: storage});
 
 // uploading file to aws,
 module.exports.uploadfile = (req, cb) => {
+    fs.readFile(req.file.path, (err, data) => {
+        if (!err) {
+            const fileKey = req.file.filename.replace(/\.[^/.]+$/, '');
+            const useremail = req.user.local.email ? req.user.local.email : req.user.facebook.email;
+            const newVideo = new Video({
+                title: req.body['video-title'],
+                category: req.body['video-category'],
+                artists: req.body['video-artists'],
+                desc: req.body.desc,
+                user: useremail,
+                progressiveSrc: fileKey,
+                dashSrc: process.env.CLOUDFRONT_URL + '/dash/' + fileKey + '-master.mpd',
+                hlsSrc: process.env.CLOUDFRONT_URL + '/hls/' + fileKey + '-master.m3u8',
+                thumbSrc: process.env.AWS_STORAGE_LINK + 's3-media-out/thumbs/' + fileKey + '-00002.png',
+                views: Math.floor(Math.random() * (100 - 1)),
+            });
 
-    return new Promise((resolve, reject) => {
-        fs.readFile(req.file.path, (err, data) => {
-            if (!err) {
-                const fileKey = req.file.filename.replace(/\.[^/.]+$/, '');
-                const useremail = req.user.local.email ? req.user.local.email : req.user.facebook.email;
-                const newVideo = new Video({
-                    title: req.body['video-title'],
-                    category: req.body['video-category'],
-                    artists: req.body['video-artists'],
-                    desc: req.body.desc,
-                    user: useremail,
-                    progressiveSrc: fileKey,
-                    dashSrc: process.env.CLOUDFRONT_URL + '/dash/' + fileKey + '-master.mpd',
-                    hlsSrc: process.env.CLOUDFRONT_URL + '/hls/' + fileKey + '-master.m3u8',
-                    thumbSrc: process.env.AWS_STORAGE_LINK + 's3-media-out/thumbs/' + fileKey + '-00002.png',
-                    views: Math.floor(Math.random() * (100 - 1)),
+            const params = {
+                Bucket: process.env.AWS_INPUT_BUCKET,
+                Key: fileKey,
+                Body: data,
+            };
+
+            new Promise((resolve, reject) => {
+                ffprobe(req.file.path, {path: ffprobeStatic.path}).then((info) => {
+                    newVideo.length = (parseFloat(info.streams[0].duration) / 60).toFixed(2);
+                    resolve(newVideo);
+                }).catch((err) => {
+                    newVideo.length = 0;
+                    resolve(newVideo);
+
+                })
+            }).then(newVideo => {
+                S3.putObject(params, (err, data) => {
+                    if (!err) {
+                        fs.unlinkSync(req.file.path);
+                        Video.create(newVideo, (err, data) => {
+                            console.log(data || err)
+
+                        })
+                    }
                 });
 
-                const params = {
-                    Bucket: process.env.AWS_INPUT_BUCKET,
-                    Key: fileKey,
-                    Body: data,
-                };
+            });
 
-                 new Promise((resolve, reject) => {
-                    ffprobe(req.file.path, {path: ffprobeStatic.path}).then((info) => {
-                        newVideo.length = (parseFloat(info.streams[0].duration)/60).toFixed(2);
-                        resolve(newVideo)
-                    }).catch((err) => {
-                        newVideo.length = 0;
-                        resolve(newVideo)
+            return cb(null, 'Upload Success and your video will take few minutes to be processed!!');
 
-                    })
-                }).then(newVideo => {
-                    S3.putObject(params, (err, data) => {
-                        if (!err) {
-                            fs.unlinkSync(req.file.path);
-                            resolve(newVideo);
+        } else {
+            return cb(err, null);
+        }
 
-                        } else {
-                            reject(err);
-                        }
-                    });
-
-                }).then((result) => {
-                    Video.create(result, (err, data) => {
-                        console.log(data || err)
-
-                    })
-                }, err => {
-                    console.log(err)
-
-                });
-
-                return cb(null, 'Upload Success and your video will take few minutes to be processed!!');
-
-            } else {
-                return cb(err, null);
-            }
-        });
     });
 
 

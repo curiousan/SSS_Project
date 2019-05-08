@@ -54,11 +54,14 @@ module.exports.myVideos = (user, cb) => {
 module.exports.addNewVideo = (req, res) => {
     upload.single('video')(req, res, (err) => {
         if (err) return res.send(err);
-        aws.uploadfile(req, (err, msg) => {
-            if (err) req.flash('err_msg', err);
-            if (msg) req.flash('info_msg', msg);
-            return res.redirect('/');
-        });
+        else {
+            aws.uploadfile(req, (err, msg) => {
+                if (err) req.flash('err_msg', err);
+                if (msg) req.flash('info_msg', msg);
+                return res.redirect('/');
+            });
+        }
+
     });
 };
 
