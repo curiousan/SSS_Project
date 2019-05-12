@@ -57,19 +57,17 @@
         <!-- nav bar starts here-->
         <div class="top-bar container-fluid sticky-top">
             <nav class="navbar navbar-expand-sm ">
-                <a href="/" class="navbar-brand">Stream</a>
+                <a href="/" class="navbar-brand">Streamz</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseMenu"
                     aria-controls="collapseMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse nd-flex justify-content-end align-items-center" id="collapseMenu">
                     <ul class="navbar-nav wide-padded-list">
-                        <li class="nav-item">
+                        {{!-- <li class="nav-item">
                             <a href="/videos" class="nav-link">Videos </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Audios </a>
-                        </li>
+                         --}}
                         <li class="nav-item dropdown">
                             {{#if currentUser}}
                                 <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -82,11 +80,17 @@
                                     <a class="dropdown-item" href="/logout">Logout</a>
                                 </div>
                             {{else}}
-                                <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                {{!-- <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Register</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/signup">Sign Up</a>
-                                    <a class="dropdown-item" href="/login">Login</a>
+                                    <a class="dropdown-item" href="/login">Login</a> --}}
+                                <li class="nav-item">
+                                    <a href="/signup" class="nav-link">Sign up</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/login" class="nav-link">Login</a>
+                                </li>
                             {{/if}}
                         </li>
                     </ul>
