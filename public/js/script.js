@@ -48,9 +48,9 @@ const startStreaming = (player, video) => {
   const conf = {
     key: '9d37162f-06a0-47b4-98de-4d3ae080fe31',
     source: {
-      dash: 'http://' + video.dashSrc,
-      hls: 'http://' + video.hlsSrc,
-      progressive: 'http://' + video.progressiveSrc,
+      dash: 'https://' + video.dashSrc,
+      hls: 'https://' + video.hlsSrc,
+      progressive: 'https://' + video.progressiveSrc,
       poster: video.thumbSrc,
     },
   };
@@ -72,13 +72,13 @@ const getVideoData = (event) => {
   return new Promise((resolve, reject) => {
     // console.log(
     //     'calling endpoints ' +
-    //     'http://' +
+    //     'https://' +
     //     window.location.host +
     //     '/api/videos/' +
     //     id +
     //     '/'
     // );
-    fetch('http://' + window.location.host + '/api/videos/' + id + '/')
+    fetch('https://' + window.location.host + '/api/videos/' + id + '/')
       .then((data) => {
         return data.json();
       })
