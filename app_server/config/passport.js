@@ -41,7 +41,7 @@ passport.use(
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
       // callbackURL: 'https://stream-transcoder.herokuapp.com/auth/facebook/callback',
-      callbackURL: 'http://localhost:3000/auth/facebook/callback',
+      callbackURL: `${process.env.SITE_URL}/auth/facebook/callback`,
       profileURL:
         'https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email',
       profileFields: ['id', 'email', 'name'],
